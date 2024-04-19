@@ -671,7 +671,7 @@ function badGuyCritMult(enemy = getCurrentEnemy(), critPower = 2, block = game.g
 function calcEnemyBaseAttack(worldType = _getWorldType(), zone = _getZone(worldType), cell = _getCell(), name = _getEnemyName('Chimp'), query = false) {
 	const mapGrid = worldType === 'world' ? 'gridArray' : 'mapGridArray';
 
-	if (!query && zone >= 200 && cell !== 100 && worldType === 'world' && game.global.universe === 2 && game.global[mapGrid][cell].u2Mutation) {
+	if (!query && (zone >= 200 || challengeActive('Randomized')) && cell !== 100 && worldType === 'world' && game.global.universe === 2 && game.global[mapGrid][cell].u2Mutation) {
 		return u2Mutations.getAttack(game.global[mapGrid][cell - 1]);
 	}
 
@@ -850,7 +850,7 @@ function calcSpecificEnemyAttack(critPower = 2, customBlock, customHealth, custo
 }
 
 function calcEnemyBaseHealth(worldType = _getWorldType(), zone = _getZone(worldType), cell = _getCell(), name = _getEnemyName('Turtlimp'), ignoreMutation) {
-	if (!ignoreMutation && worldType === 'world' && game.global.universe === 2 && game.global.world > 200 && typeof game.global.gridArray[cell - 1].u2Mutation !== 'undefined') {
+	if (!ignoreMutation && worldType === 'world' && game.global.universe === 2 && (game.global.world >= 200 || challengeActive('Randomized')) && typeof game.global.gridArray[cell - 1].u2Mutation !== 'undefined') {
 		if (game.global.gridArray[cell - 1].u2Mutation.length > 0 && ['CSX', 'CSP'].some((mutation) => game.global.gridArray[cell - 1].u2Mutation.includes(mutation))) {
 			cell = game.global.gridArray[cell - 1].cs;
 		}
@@ -908,7 +908,7 @@ function calcEnemyHealthCore(worldType = _getWorldType(), zone = _getZone(worldT
 			else if (worldType === 'void' && mutations.Corruption.active()) health *= corruptionScale / 2;
 		}
 	} else if (game.global.universe === 2) {
-		if (gridInitialised && worldType === 'world' && game.global.world > 200 && game.global.gridArray[cell - 1].u2Mutation.length > 0) {
+		if (gridInitialised && worldType === 'world' && (game.global.world > 200 || challengeActive('Randomized')) && game.global.gridArray[cell - 1].u2Mutation.length > 0) {
 			health = mutationBaseStats(cell - 1, zone, 'health');
 		}
 	}

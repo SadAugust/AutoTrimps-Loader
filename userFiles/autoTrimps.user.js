@@ -1,6 +1,3 @@
-const url = 'https://localhost:8887/AutoTrimps_Loader/';
-url = 'https://sadaugust.github.io/AutoTrimps/AutoTrimps2.js';
-
 // ==UserScript==
 // @name         AutoTrimps-SadAugust
 // @version      1.0-SadAugust

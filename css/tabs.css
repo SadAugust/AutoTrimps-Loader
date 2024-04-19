@@ -1,0 +1,1290 @@
+#logBtnGroup div {
+	width: 19% !important;
+}
+
+div#logConfigHolder.btn-group {
+	width: 5% !important;
+}
+
+#logConfigBtn {
+	padding: 6px 0 !important;
+}
+
+ul.tab {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+ul.tab li {
+	float: left;
+}
+
+ul.tab li a {
+	display: inline-block;
+	color: black;
+	text-align: center;
+	padding: 0.5vh 0.85vw;
+	text-decoration: none;
+	transition: 0.3s;
+	font-size: 0.85vw;
+	border-right: solid 1px;
+}
+
+ul.tab li .active {
+	background-color: #ccc;
+}
+
+ul.tab li a:hover {
+	background-color: #ddd;
+}
+
+.tabcontent {
+	display: none;
+	border: 1px solid #ccc;
+	border-top: none;
+	-webkit-animation: fadeEffect 1s;
+	animation: fadeEffect 1s;
+	/* Fading effect takes 1 second */
+	transform: translateZ(0);
+}
+
+@-webkit-keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+#tipText .autoEggs,
+#autoEggs.settingBtntrue {
+	-webkit-animation: eggGradient 3s infinite;
+	animation: eggGradient 3s infinite;
+	color: black;
+}
+
+@keyframes eggGradient {
+	0% {
+		background-color: #83ddd6;
+	}
+
+	25% {
+		background-color: #f4c7c7;
+	}
+
+	50% {
+		background-color: #8beab7;
+	}
+
+	75% {
+		background-color: #f6f297;
+	}
+
+	100% {
+		background-color: #83ddd6;
+	}
+}
+
+#trapArea {
+	border: 1px solid white;
+	display: inline-block;
+	margin-bottom: 2%;
+	margin-top: 0;
+	padding: 0;
+}
+
+#animationDiv {
+	z-index: -1 !important;
+}
+
+.queueItemName,
+#queueTimeRemaining {
+	z-index: 0 !important;
+}
+
+.heirloomRare8 {
+	text-shadow: none;
+}
+
+#messageConfig {
+	height: 3vw;
+	font-size: 1vw;
+}
+
+.messageNameHolder {
+	font-size: 1.2vw;
+}
+
+.litScroll {
+	overflow-y: scroll;
+	height: 30.5vw;
+}
+
+#wrapper {
+	background: none;
+}
+
+#wrapper {
+	background: -webkit-linear-gradient(left, #323341 12%, #626368 29.5%, #727275 47%, #727275 53%, #4c4d56 70.5%, #323341 88%);
+}
+
+/*MAZ LAYOUT CSS*/
+.structConfigPercent,
+.dailyAutoPortalZone,
+.dailyAutoPortalChallenge {
+	display: inline-block;
+	width: 50%;
+	padding: 1%;
+	line-height: normal;
+	border-width: 1px;
+	margin-right: 5%;
+}
+
+.structConfigZone,
+.structConfigCell {
+	display: inline-block;
+	width: 50%;
+	padding: 1%;
+	line-height: normal;
+	border-width: 1px;
+	margin-right: 5%;
+}
+
+.windowRow div input,
+.windowRow div select {
+	width: 100%;
+}
+
+.windowRow {
+	padding: 0 2%;
+	margin: 0 1%;
+	font-weight: bold;
+}
+
+.windowRow.titles div {
+	text-align: center;
+	font-weight: bold;
+}
+
+.windowRow.titles {
+	border: 1px solid black;
+	margin: 0 1%;
+	margin-top: 0.2vw;
+	padding: 0.2% 2%;
+}
+
+#windowAddRowBtn,
+#windowSwapPresetBtn {
+	position: relative;
+	margin-top: 0.5vw;
+	left: 1vw;
+}
+
+.windowDelete .icomoon {
+	display: inline-block;
+	position: relative;
+	top: 0.6vw;
+	left: -1.5vw;
+	color: red;
+	font-weight: bold;
+	font-size: 2vw;
+	width: 0%;
+	cursor: pointer;
+	padding-left: 0%;
+}
+
+.windowDelete {
+	display: inline-block;
+	position: relative;
+	width: 0%;
+	cursor: pointer;
+	padding-left: 0%;
+}
+
+.windowLevelOn .windowLevel {
+	opacity: 1;
+	padding-left: 1%;
+}
+
+.windowLevelOff .windowLevel {
+	opacity: 0.3;
+	cursor: not-allowed;
+	pointer-events: none;
+	padding-left: 1%;
+}
+
+.windowDisplay {
+	position: relative;
+	display: inline-block;
+	padding-left: 1%;
+}
+
+/* Map Farm */
+.windowAutoLevelMapFarm {
+	width: 3%;
+}
+
+.windowActiveMapFarm,
+.windowEndZoneMapFarm {
+	width: 4%;
+}
+
+.windowPriorityMapFarm,
+.windowWorldMapFarm,
+.windowCellMapFarm,
+.windowLevelMapFarm,
+.windowRepeatEveryMapFarm {
+	width: 5%;
+}
+
+.windowRepeatMapFarm,
+.windowHDRatioMapFarm,
+.windowJobRatioMapFarm {
+	width: 6%;
+}
+
+.windowMapTypeDropdownMapFarm {
+	width: 8%;
+}
+
+.windowSpecialMapFarm {
+	width: 14%;
+}
+
+.windowRunTypeMapFarm,
+.windowMapTypeDropdownDefaultMapFarm {
+	width: 20%;
+}
+
+.windowChallengeOnMapFarm .windowChallengeMapFarm,
+.windowChallenge3OnMapFarm .windowChallenge3MapFarm,
+.windowChallengeOneOffOnMapFarm .windowChallengeOneOffMapFarm {
+	display: inline-block;
+	width: 10%;
+}
+
+.windowChallenge3OnMapFarm .windowRunTypeMapFarm,
+.windowChallengeOneOffOnMapFarm .windowRunTypeMapFarm,
+.windowChallengeOnMapFarm .windowRunTypeMapFarm {
+	display: inline-block;
+	width: 10%;
+}
+
+.windowChallengeOffMapFarm .windowChallengeMapFarm,
+.windowChallenge3OffMapFarm .windowChallenge3MapFarm,
+.windowChallengeOneOffOffMapFarm .windowChallengeOneOffMapFarm {
+	display: none;
+}
+
+.windowGatherOn .windowSpecialMapFarm {
+	width: 6%;
+	padding-left: 1%;
+}
+
+/* Tribute Farm */
+.windowActiveTributeFarm,
+.windowPriorityTributeFarm,
+.windowWorldTributeFarm,
+.windowCellTributeFarm,
+.windowAutoLevelTributeFarm,
+.windowLevelTributeFarm,
+.windowEndZoneTributeFarm {
+	width: 5%;
+}
+
+.windowRepeatEveryTributeFarm,
+.windowTributes,
+.windowMets {
+	width: 6%;
+}
+
+.windowJobRatioTributeFarm {
+	width: 7%;
+}
+
+.windowMapTypeDropdownTributeFarm {
+	width: 9%;
+}
+
+.windowBuildings {
+	width: 10%;
+	padding-left: 2%;
+	left: -0.5vw;
+}
+
+.windowMapTypeDropdownDefaultTributeFarm {
+	width: 15%;
+}
+
+.windowRunTypeTributeFarm {
+	width: 16%;
+	padding-left: 0%;
+}
+
+.windowChallengeOnTributeFarm .windowChallengeTributeFarm,
+.windowChallenge3OnTributeFarm .windowChallenge3TributeFarm,
+.windowChallengeOneOffOnTributeFarm .windowChallengeOneOffTributeFarm {
+	display: inline-block;
+	width: 6%;
+	padding-left: 0%;
+}
+
+.windowChallenge3OnTributeFarm .windowRunTypeTributeFarm,
+.windowChallengeOnTributeFarm .windowRunTypeTributeFarm,
+.windowChallengeOneOffOnTributeFarm .windowRunTypeTributeFarm {
+	display: inline-block;
+	width: 10%;
+	padding-left: 0%;
+}
+
+.windowChallengeOffTributeFarm .windowChallengeTributeFarm,
+.windowChallenge3OffTributeFarm .windowChallenge3TributeFarm,
+.windowChallengeOneOffOffTributeFarm .windowChallengeOneOffTributeFarm {
+	display: none;
+	padding-left: 0%;
+}
+
+/* Smithy Farm */
+.windowMeltingPoint {
+	width: 5%;
+}
+
+.windowActiveSmithyFarm,
+.windowPrioritySmithyFarm,
+.windowCellSmithyFarm,
+.windowAutoLevelSmithyFarm,
+.windowLevelSmithyFarm {
+	width: 6%;
+}
+
+.windowWorldSmithyFarm,
+.windowEndZoneSmithyFarm,
+.windowSmithies {
+	width: 7%;
+}
+
+.windowRepeatEverySmithyFarm {
+	width: 8%;
+}
+
+.windowMapTypeDropdownSmithyFarm,
+.windowMapTypeDropdownDefaultSmithyFarm {
+	width: 13%;
+}
+
+.windowRunTypeSmithyFarm {
+	width: 22%;
+}
+
+.windowChallengeOnSmithyFarm .windowChallengeSmithyFarm,
+.windowChallenge3OnSmithyFarm .windowChallenge3SmithyFarm,
+.windowChallengeOneOffOnSmithyFarm .windowChallengeOneOffSmithyFarm {
+	display: inline-block;
+	width: 10%;
+}
+
+.windowChallenge3OnSmithyFarm .windowRunTypeSmithyFarm,
+.windowChallengeOnSmithyFarm .windowRunTypeSmithyFarm,
+.windowChallengeOneOffOnSmithyFarm .windowRunTypeSmithyFarm {
+	display: inline-block;
+	width: 12%;
+}
+
+.windowChallengeOffSmithyFarm .windowChallengeSmithyFarm,
+.windowChallenge3OffSmithyFarm .windowChallenge3SmithyFarm,
+.windowChallengeOneOffOffSmithyFarm .windowChallengeOneOffSmithyFarm {
+	display: none;
+}
+
+/* Map Bonus */
+.windowActiveMapBonus,
+.windowCellMapBonus,
+.windowAutoLevelMapBonus,
+.windowLevelMapBonus {
+	width: 5%;
+}
+
+.windowWorldMapBonus,
+.windowEndZoneMapBonus,
+.windowMapStacks {
+	width: 6%;
+}
+
+.windowPriorityMapBonus,
+.windowHDRatioMapBonus {
+	width: 7%;
+}
+
+.windowJobRatioMapBonus {
+	width: 8%;
+}
+
+.windowSpecialMapBonus,
+.windowRunTypeMapBonus {
+	width: 20%;
+}
+
+.windowChallengeOnMapBonus .windowChallengeMapBonus,
+.windowChallenge3OnMapBonus .windowChallenge3MapBonus,
+.windowChallengeOneOffOnMapBonus .windowChallengeOneOffMapBonus {
+	display: inline-block;
+	width: 11%;
+}
+
+.windowChallenge3OnMapBonus .windowRunTypeMapBonus,
+.windowChallengeOneOffOnMapBonus .windowRunTypeMapBonus,
+.windowChallengeOnMapBonus .windowRunTypeMapBonus {
+	display: inline-block;
+	width: 9%;
+}
+
+.windowChallengeOffMapBonus .windowChallengeMapBonus,
+.windowChallenge3OffMapBonus .windowChallenge3MapBonus,
+.windowChallengeOneOffOffMapBonus .windowChallengeOneOffMapBonus {
+	display: none;
+}
+
+.windowGatherOn .windowSpecialMapBonus {
+	width: 12%;
+}
+
+/* Raiding */
+.windowActiveRaiding,
+.windowPriorityRaiding,
+.windowWorldRaiding,
+.windowCellRaiding,
+.windowEndZoneRaiding,
+.windowRepeatEveryRaiding,
+.windowRaidingZoneRaiding,
+.windowIncrementMaps {
+	width: 5%;
+}
+
+.windowRecycle {
+	width: 8%;
+}
+
+.windowRaidingDropdown {
+	width: 10%;
+}
+
+.windowPrestigeGoalRaiding {
+	width: 19%;
+}
+
+.windowRunTypeRaiding {
+	width: 30%;
+}
+
+.windowChallengeOnRaiding .windowChallengeRaiding,
+.windowChallenge3OnRaiding .windowChallenge3Raiding,
+.windowChallengeOneOffOnRaiding .windowChallengeOneOffRaiding {
+	display: inline-block;
+	width: 14%;
+}
+
+.windowChallenge3OnRaiding .windowRunTypeRaiding,
+.windowChallengeOnRaiding .windowRunTypeRaiding,
+.windowChallengeOneOffOnRaiding .windowRunTypeRaiding {
+	display: inline-block;
+	width: 16%;
+}
+
+.windowChallengeOffRaiding .windowChallengeRaiding,
+.windowChallenge3OffRaiding .windowChallenge3Raiding,
+.windowChallengeOneOffOffRaiding .windowChallengeOneOffRaiding {
+	display: none;
+}
+
+/* Bionic Raiding */
+.windowActiveBionicRaiding,
+.windowPriorityBionicRaiding,
+.windowWorldBionicRaiding,
+.windowCellBionicRaiding,
+.windowRepeatEveryBionicRaiding,
+.windowEndZoneBionicRaiding,
+.windowRaidingZoneBionicRaiding {
+	width: 7%;
+}
+
+.windowPrestigeGoalBionicRaiding {
+	width: 19%;
+}
+
+.windowRunTypeBionicRaiding {
+	width: 31%;
+}
+
+.windowChallengeOnBionicRaiding .windowChallengeBionicRaiding,
+.windowChallenge3OnBionicRaiding .windowChallenge3BionicRaiding,
+.windowChallengeOneOffOnBionicRaiding .windowChallengeOneOffBionicRaiding {
+	display: inline-block;
+	width: 18%;
+}
+
+.windowChallenge3OnBionicRaiding .windowRunTypeBionicRaiding,
+.windowChallengeOneOffOnBionicRaiding .windowRunTypeBionicRaiding,
+.windowChallengeOnBionicRaiding .windowRunTypeBionicRaiding {
+	display: inline-block;
+	width: 13%;
+}
+
+.windowChallengeOffBionicRaiding .windowChallengeBionicRaiding,
+.windowChallenge3OffBionicRaiding .windowChallenge3BionicRaiding,
+.windowChallengeOneOffOffBionicRaiding .windowChallengeOneOffBionicRaiding {
+	display: none;
+}
+
+/* HD Farm */
+.windowAutoLevelHDFarm {
+	width: 5%;
+}
+
+.windowActiveHDFarm,
+.windowWorldHDFarm,
+.windowCellHDFarm,
+.windowLevelHDFarm,
+.windowEndZoneHDFarm,
+.windowMapCap {
+	width: 6%;
+}
+
+.windowPriorityHDFarm,
+.windowJobRatioHDFarm,
+.windowMapLevelOn .windowHDMult,
+.windowMapLevelOn .windowHDBase {
+	width: 7%;
+}
+
+.windowHDType {
+	width: 10%;
+}
+
+.windowMapLevelOff .windowHDBase {
+	width: 14%;
+}
+
+.windowRunTypeHDFarm {
+	width: 20%;
+}
+
+.windowMapLevelOff .windowHDMult {
+	display: none;
+}
+
+.windowChallengeOnHDFarm .windowChallengeHDFarm,
+.windowChallenge3OnHDFarm .windowChallenge3HDFarm,
+.windowChallengeOneOffOnHDFarm .windowChallengeOneOffHDFarm {
+	display: inline-block;
+	width: 10%;
+}
+
+.windowChallenge3OnHDFarm .windowRunTypeHDFarm,
+.windowChallengeOneOffOnHDFarm .windowRunTypeHDFarm,
+.windowChallengeOnHDFarm .windowRunTypeHDFarm {
+	display: inline-block;
+	width: 10%;
+}
+
+.windowChallengeOffHDFarm .windowChallengeHDFarm,
+.windowChallenge3OffHDFarm .windowChallenge3HDFarm,
+.windowChallengeOneOffOffHDFarm .windowChallengeOneOffHDFarm {
+	display: none;
+}
+
+/* Toxicity */
+.windowActiveToxicity,
+.windowAutoLevelToxicity {
+	width: 6%;
+}
+
+.windowPriorityToxicity {
+	width: 7%;
+}
+
+.windowWorldToxicity,
+.windowCellToxicity,
+.windowLevelToxicity,
+.windowRepeatToxicity,
+.windowJobRatioToxicity,
+.windowRepeatEveryToxicity,
+.windowEndZoneToxicity {
+	width: 8%;
+}
+
+.windowGatherOn .windowSpecialToxicity {
+	width: 17%;
+}
+
+.windowSpecialToxicity {
+	width: 25%;
+}
+
+/* Worshipper Farm */
+.windowAutoLevelWorshipperFarm {
+	width: 5%;
+}
+
+.windowActiveWorshipperFarm,
+.windowPriorityWorshipperFarm {
+	width: 6%;
+}
+
+.windowWorldWorshipperFarm,
+.windowCellWorshipperFarm,
+.windowLevelWorshipperFarm,
+.windowRepeatEveryWorshipperFarm,
+.windowEndZoneWorshipperFarm,
+.windowWorshipperSkip,
+.windowWorshipper {
+	width: 8%;
+}
+
+.windowJobRatioWorshipperFarm {
+	width: 9%;
+}
+
+.windowRunTypeWorshipperFarm {
+	width: 25%;
+}
+
+.windowChallengeOnWorshipperFarm .windowChallengeWorshipperFarm,
+.windowChallengeOneOffOnWorshipperFarm .windowChallengeOneOffWorshipperFarm,
+.windowChallenge3OnWorshipperFarm .windowChallenge3WorshipperFarm {
+	display: inline-block;
+	width: 12%;
+}
+
+.windowChallenge3OnWorshipperFarm .windowRunTypeWorshipperFarm,
+.windowChallengeOneOffOnWorshipperFarm .windowRunTypeWorshipperFarm,
+.windowChallengeOnWorshipperFarm .windowRunTypeWorshipperFarm {
+	display: inline-block;
+	width: 13%;
+}
+
+.windowChallengeOffWorshipperFarm .windowChallengeWorshipperFarm,
+.windowChallenge3OffWorshipperFarm .windowChallenge3WorshipperFarm,
+.windowChallengeOneOffOffWorshipperFarm .windowChallengeOneOffWorshipperFarm {
+	display: none;
+}
+
+/* Bone Shrine */
+.windowActiveBoneShrine {
+	width: 6%;
+}
+
+.windowPriorityBoneShrine,
+.windowBoneBelow,
+.windowBoneAmount {
+	width: 9%;
+}
+
+.windowWorldBoneShrine,
+.windowCellBoneShrine {
+	width: 9%;
+}
+
+.windowJobRatioBoneShrine,
+.windowBoneGather {
+	width: 10%;
+}
+
+.windowAutoBoneShrine {
+	width: 12%;
+}
+
+.windowBoneDefault {
+	width: 15%;
+}
+
+.windowSpecialBoneShrine {
+	width: 22%;
+}
+
+.windowRunTypeBoneShrine {
+	width: 25%;
+}
+
+.windowChallengeOnBoneShrine .windowChallengeBoneShrine,
+.windowChallenge3OnBoneShrine .windowChallenge3BoneShrine,
+.windowChallengeOneOffOnBoneShrine .windowChallengeOneOffBoneShrine {
+	display: inline-block;
+	width: 12%;
+}
+
+.windowChallenge3OnBoneShrine .windowRunTypeBoneShrine,
+.windowChallengeOneOffOnBoneShrine .windowRunTypeBoneShrine,
+.windowChallengeOnBoneShrine .windowRunTypeBoneShrine {
+	display: inline-block;
+	width: 13%;
+}
+
+.windowChallengeOffBoneShrine .windowChallengeBoneShrine,
+.windowChallenge3OffBoneShrine .windowChallenge3BoneShrine,
+.windowChallengeOneOffOffBoneShrine .windowChallengeOneOffBoneShrine {
+	display: none;
+}
+
+/* Quagmire */
+.windowActiveQuagmire,
+.windowPriorityQuagmire,
+.windowWorldQuagmire,
+.windowCellQuagmire,
+.windowJobRatioQuagmire {
+	width: 16%;
+}
+
+.windowBogs {
+	width: 18%;
+}
+
+.windowAbandonZone {
+	width: 25%;
+}
+
+/* Archaeology */
+.windowAutoLevelArchaeology {
+	width: 6%;
+}
+
+.windowPriorityArchaeology,
+.windowWorldArchaeology,
+.windowEndZoneArchaeology,
+.windowCellArchaeology,
+.windowLevelArchaeology,
+.windowRepeatEveryArchaeology {
+	width: 7%;
+}
+
+.windowActiveArchaeology {
+	width: 9%;
+}
+
+.windowJobRatioArchaeology {
+	width: 14%;
+}
+
+.windowRelicsArchaeology {
+	width: 23%;
+}
+
+/* Insanity */
+.windowAutoLevelInsanity {
+	width: 5%;
+}
+
+.windowActiveInsanity {
+	width: 8%;
+}
+
+.windowPriorityInsanity,
+.windowWorldInsanity,
+.windowCellInsanity,
+.windowLevelInsanity,
+.windowJobRatioInsanity,
+.windowInsanity {
+	width: 9%;
+}
+
+.windowSpecialInsanity {
+	width: 22%;
+}
+
+/* Alchemy */
+.windowActiveAlchemy,
+.windowPriorityAlchemy,
+.windowWorldAlchemy,
+.windowCellAlchemy,
+.windowAutoLevelAlchemy,
+.windowEndZoneAlchemy,
+.windowRepeatEveryAlchemy,
+.windowLevelAlchemy {
+	width: 5%;
+}
+
+.windowPotionNumber {
+	width: 6%;
+}
+
+.windowJobRatioAlchemy {
+	width: 8%;
+}
+
+.windowMapTypeDropdownAlchemy,
+.windowGatherOn .windowSpecialAlchemy {
+	width: 11%;
+}
+
+.windowPotionType {
+	width: 16%;
+}
+
+.windowSpecialAlchemy {
+	width: 19%;
+}
+
+/* Hypothermia */
+.windowAutoLevelHypothermia {
+	width: 9%;
+}
+
+.windowActiveHypothermia,
+.windowPriorityHypothermia,
+.windowWorldHypothermia,
+.windowCellHypothermia,
+.windowLevelHypothermia,
+.windowBonfire {
+	width: 12%;
+}
+
+.windowStorage,
+.windowPackrat {
+	width: 15%;
+}
+
+.windowJobRatioHypothermia {
+	width: 18%;
+}
+
+.windowFrozenCastle {
+	width: 22%;
+}
+
+/* Desolation */
+.windowActiveDesolation {
+	width: 8%;
+}
+
+.windowPriorityDesolation,
+.windowWorldDesolation,
+.windowLevelDesolation,
+.windowRepeatEveryDesolation,
+.windowEndZoneDesolation {
+	width: 10%;
+}
+
+.windowJobRatioDesolation,
+.windowGatherOn .windowSpecialDesolation {
+	width: 12%;
+}
+
+.windowSpecialDesolation,
+.windowPrestigeGoalDesolation {
+	width: 20%;
+}
+
+.windowGatherOn .windowSpecialDesolation {
+	padding-left: 1%;
+}
+
+/* Void Map */
+.windowActiveVoidMap,
+.windowPortalAfter {
+	width: 5%;
+}
+
+.windowPriorityVoidMap,
+.windowWorldVoidMap,
+.windowEndZoneVoidMap,
+.windowCellVoidMap {
+	width: 6%;
+}
+
+.windowVoidHDRatio,
+.windowVoidHDRatio2 {
+	width: 7%;
+}
+
+.windowJobRatioVoidMap {
+	width: 9%;
+}
+
+.windowDefaultVoidMap,
+.windowHDTypeVoidMap,
+.windowHDTypeVoidMap2 {
+	width: 11%;
+}
+
+.windowRunTypeVoidMap {
+	width: 20%;
+}
+
+.windowChallengeOnVoidMap .windowChallengeVoidMap,
+.windowChallenge3OnVoidMap .windowChallenge3VoidMap,
+.windowChallengeOneOffOnVoidMap .windowChallengeOneOffVoidMap {
+	display: inline-block;
+	width: 12%;
+}
+
+.windowChallenge3OnVoidMap .windowRunTypeVoidMap,
+.windowChallengeOneOffOnVoidMap .windowRunTypeVoidMap,
+.windowChallengeOnVoidMap .windowRunTypeVoidMap {
+	display: inline-block;
+	width: 8%;
+}
+
+.windowChallengeOffVoidMap .windowChallengeVoidMap,
+.windowChallenge3OffVoidMap .windowChallenge3VoidMap,
+.windowChallengeOneOffOffVoidMap .windowChallengeOneOffVoidMap {
+	display: none;
+}
+
+.windowHDTypeDisabledOn .windowVoidHDRatio,
+.windowHDTypeDisabled2On .windowVoidHDRatio2 {
+	opacity: 0.3;
+	cursor: not-allowed;
+	pointer-events: none;
+	padding-left: 1%;
+}
+
+.windowHDTypeDisabledOff .windowVoidHDRatio,
+.windowHDTypeDisabled2Off .windowVoidHDRatio2 {
+	opacity: 1;
+	padding-left: 1%;
+}
+
+/* Golden */
+.windowPriorityAutoGolden {
+	width: 10%;
+}
+
+.windowActiveAutoGolden {
+	width: 11%;
+}
+
+.windowAmtAutoGolden,
+.windowTypeAutoGolden {
+	width: 15%;
+}
+
+.windowRunTypeAutoGolden {
+	width: 48%;
+}
+
+.windowChallengeOnAutoGolden .windowChallengeAutoGolden,
+.windowChallenge3OnAutoGolden .windowChallenge3AutoGolden,
+.windowChallengeOneOffOnAutoGolden .windowChallengeOneOffAutoGolden {
+	display: inline-block;
+	width: 24%;
+}
+
+.windowChallenge3OnAutoGolden .windowRunTypeAutoGolden,
+.windowChallengeOneOffOnAutoGolden .windowRunTypeAutoGolden,
+.windowChallengeOnAutoGolden .windowRunTypeAutoGolden {
+	display: inline-block;
+	width: 24%;
+}
+
+.windowChallengeOffAutoGolden .windowChallengeAutoGolden,
+.windowChallenge3OffAutoGolden .windowChallenge3AutoGolden,
+.windowChallengeOneOffOffAutoGolden .windowChallengeOneOffAutoGolden {
+	display: none;
+}
+
+/* Other inputs that are repeated */
+.windowGather {
+	display: inline-block;
+	padding-left: 1%;
+}
+
+#windowError {
+	font-weight: bold;
+	color: red;
+}
+
+.windowRepeat {
+	width: 7%;
+}
+
+.windowAtlantrimp {
+	width: 4%;
+}
+
+.windowGatherOff .windowGather {
+	display: none;
+}
+
+.windowGatherOn .windowGather {
+	width: 8%;
+}
+
+.uniqueMapValue {
+	display: inline-block;
+	width: 50%;
+	padding: 1%;
+	line-height: normal;
+	border-width: 1px;
+	margin-right: 10%;
+}
+
+.settingsBtnLocal {
+	font-size: 1.3vw;
+	cursor: pointer;
+	text-align: center;
+}
+
+.settingsBtnLocalCogwheel {
+	font-size: 1.3vw;
+	border-right: 1px solid black !important;
+	border-top: 1px solid black !important;
+	border-bottom: 1px solid black !important;
+	cursor: pointer;
+	text-align: center;
+}
+
+.toggleConfigBtnLocal {
+	overflow: hidden;
+}
+
+.toggleConfigBtnLocal div {
+	display: inline-block;
+	text-align: center;
+}
+
+.toggleConfigBtnLocal div:first-child {
+	width: 80%;
+}
+
+.toggleConfigBtnLocal div:nth-child(2) {
+	width: 20%;
+	background-color: grey;
+	float: right;
+}
+
+.toggleConfigBtnLocal div:nth-child(2):hover {
+	background-color: #666666;
+}
+
+.toggleConfigBtnLocal div span {
+	line-height: 1.2em;
+	font-size: 1.1em;
+}
+
+li.indent {
+	list-style-type: square;
+	margin-left: 1vw;
+}
+
+/* Portal Screen CSS overrides */
+#empHide,
+#unempHide {
+	font-size: 1.1em;
+}
+
+.sizeSecReduced {
+	font-size: 1em !important;
+	margin-top: 0.2em;
+}
+
+#titleRow {
+	height: 4.7vw;
+	margin-bottom: 0.5vw;
+}
+
+#portalHelium {
+	font-size: 1.7vw;
+	line-height: 1.8vw;
+}
+
+#portalTotalPortals,
+#portalTotalSpent,
+#portalTotalHelium {
+	font-size: 1.3vw;
+	line-height: 1.4vw;
+}
+
+#portalTitle {
+	width: 100%;
+	font-size: 3vw;
+	text-align: center;
+	margin-top: 0.9vw;
+}
+
+.inPortalBtn {
+	font-size: 1.3vw !important;
+}
+
+.portalThing {
+	width: 19.3%;
+	font-size: 1.231vw;
+}
+
+.portalThing.detailed {
+	font-size: 0.75vw;
+	line-height: 0.85vw;
+}
+
+#offlineExtraBtnsContainer,
+#offlineMapBtns,
+#offlineZoneBtns {
+	height: 24vw;
+	border: 1px solid white;
+	padding-top: 2vw;
+}
+
+#offlineInnerWrapper {
+	width: 50%;
+	margin-left: 25%;
+	font-size: 1.5vw;
+	padding-top: 6%;
+}
+
+#settingsRowTW {
+	position: fixed;
+	bottom: 0;
+	background-color: #545353;
+	width: 100%;
+	left: 0;
+	color: white;
+	z-index: 7;
+}
+
+h9 {
+	text-decoration: underline;
+}
+
+/* New stuff goes here */
+.btn-changelogNew {
+	background: #1e3c75;
+	font-weight: bold;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	width: 100%;
+}
+
+.btn-changelogNew:hover,
+.btn-changelogNew:focus,
+.btn-changelogNew.focus,
+.btn-changelogNew:active,
+.btn-changelogNew.active,
+.open > .dropdown-toggle.btn-new {
+	background: #345594;
+	color: white;
+}
+
+.open > .dropdown-toggle.btn-new {
+	background-image: none;
+}
+
+.btn-changelog {
+	background: #183854;
+	font-weight: bold;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	width: 100%;
+}
+
+.btn-changelog:hover,
+.btn-changelog:focus,
+.btn-changelog.focus,
+.btn-changelog:active,
+.btn-changelog.active,
+.open > .dropdown-toggle.btn-new {
+	background: #8a648a;
+	color: white;
+}
+
+.open > .dropdown-toggle.btn-new {
+	background-image: none;
+}
+
+.select2 {
+	position: relative;
+	font-size: 0.8vw;
+	color: white;
+	min-width: 13.5vw;
+	max-width: 13.5vw;
+	margin-bottom: 0.1vw;
+}
+
+/* Dropdown results.
+Appears when you click the dropdown button! */
+.select2-container--default .select2-results > .select2-results__options {
+	max-height: 28vw !important;
+	font-size: 0.9vw;
+	line-height: 0.8vw;
+}
+
+/* Dropdown text button */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	background-color: #000;
+	border: 1px white solid;
+	color: white;
+	text-align: left;
+	min-height: 1.5vw;
+	max-height: 1.5vw;
+	padding-left: 0.25vw;
+}
+
+.select2-container .select2-selection--single {
+	display: contents;
+}
+
+.select2-control .select2-container {
+	height: auto !important;
+	padding: 0;
+}
+
+.select2-search--dropdown {
+	background-color: #000;
+	color: white;
+}
+
+.select2-search__field {
+	background-color: #000;
+	color: white;
+}
+
+.select2-results {
+	background-color: #000;
+	color: white;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 1.3vw;
+	width: -webkit-fill-available;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 1.3vw;
+	right: 0px;
+}
+
+.select-wrapper {
+	position: relative;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	display: flex;
+	pointer-events: all;
+
+	&[data-prefix] {
+		&:before {
+			content: attr(data-prefix);
+			display: flex;
+			align-items: center;
+			background-color: #000;
+			vertical-align: center;
+			position: absolute;
+			z-index: 0;
+			font-size: 0.8vw;
+			left: 1px;
+			bottom: 0.2vw;
+			padding: 0 5px 0 4px;
+			color: white;
+			color: #00a7e1;
+		}
+	}
+}

@@ -999,7 +999,7 @@ function _getBiomeEnemyStats(biome) {
 //If using standalone version then when loading farmCalc file also load CSS & breedtimer+calc+farmCalcStandalone files.
 //After initial load everything should work perfectly.
 if (typeof autoTrimpSettings === 'undefined' || (typeof autoTrimpSettings !== 'undefined' && typeof autoTrimpSettings.ATversion !== 'undefined' && !autoTrimpSettings.ATversion.includes('SadAugust'))) {
-	let basepathFarmCalc = 'https://sadaugust.github.io/AutoTrimps/';
+	let basepathFarmCalc = 'https://SadAugust.github.io/AutoTrimps-Loader/';
 	/* basepathFarmCalc = 'https://localhost:8887/AutoTrimps_Local/'; */
 	//Load CSS so that the UI is visible
 	let linkStylesheet = document.createElement('link');

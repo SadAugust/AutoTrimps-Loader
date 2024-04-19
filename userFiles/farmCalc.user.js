@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name		AutoTrimps-SadAugust_FarmCalc
 // @version		1.0-SadAugust
-// @namespace	https://SadAugust.github.io/AutoTrimps
+// @namespace	https://SadAugust.github.io/AutoTrimps-Loader
 // @description	Automate all the trimps!
 // @author		zininzinin, spindrjr, Ishkaru, genBTC, Zeker0, SadAugust
 // @match		*trimps.github.io*
 // @match		*kongregate.com/games/GreenSatellite/trimps
 // @match		*trimpstest58.netlify.app/*
-// @connect		*SadAugust.github.io/AutoTrimps*
+// @connect		*SadAugust.github.io/AutoTrimps-Loader*
 // @connect		*trimps.github.io*
 // @connect		self
 // @grant		GM_xmlhttpRequest
@@ -22,4 +22,4 @@ function injectScript(id, src) {
 }
 
 //This can be edited to point to your own Github Repository URL.
-injectScript('AutoTrimps-SadAugust-FarmCalc', 'https://sadaugust.github.io/AutoTrimps/mods/farmCalc.js');
+injectScript('AutoTrimps-SadAugust-FarmCalc', 'https://sadaugust.github.io/AutoTrimps-Loader/mods/farmCalc.js');

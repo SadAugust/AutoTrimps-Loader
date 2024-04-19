@@ -14,7 +14,7 @@ https://www.tampermonkey.net/
 
 Step 2:
 
-Click this link: https://github.com/SadAugust/AutoTrimps/raw/main/userFiles/AutoTrimps.user.js
+Click this link: https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/AutoTrimps.user.js
 
 If clicking the link does not work, copy the contents of user.js into a new script inside tampermonkey.
 
@@ -29,7 +29,7 @@ function injectScript(id, src) {
 	document.head.appendChild(script);
 }
 
-injectScript('AutoTrimps-SadAugust', 'https://SadAugust.github.io/AutoTrimps/AutoTrimps2.js');
+injectScript('AutoTrimps-SadAugust', 'https://SadAugust.github.io/AutoTrimps-Loader/AutoTrimps2.js');
 ```
 
 Press F12 inside the game, this opens the console, and paste the text into it and hit enter, this will load the script. You will have to do this everytime you refresh the game though so I recommend getting tampermonkey to do it for you!
@@ -41,7 +41,7 @@ Configure settings. Will NOT work as intended with default settings.
 ## Steam
 
 Step 1:
-Go to this link to open the mods.js file: <a href="https://github.com/SadAugust/AutoTrimps/raw/main/userFiles/mods.js">mods.js</a>  
+Go to this link to open the mods.js file: <a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/mods.js">mods.js</a>  
 Then, right click the Raw button, hit Save link as, and save the mods.js file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)
 
@@ -72,11 +72,11 @@ Step 2:
 
 Click the relevant link below
 
-<a href="https://github.com/SadAugust/AutoTrimps/raw/main/userFiles/farmCalc.user.js">Heirloom Calculator</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/farmCalc.user.js">Heirloom Calculator</a>
 
-<a href="https://github.com/SadAugust/AutoTrimps/raw/main/userFiles/heirloomCalc.user.js">Farm Calculator (zfarm)</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/heirloomCalc.user.js">Farm Calculator (zfarm)</a>
 
-<a href="https://github.com/SadAugust/AutoTrimps/raw/main/userFiles/autoPerks.user.js">Auto Perks (Perky+Surky)</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/autoPerks.user.js">Auto Perks (Perky+Surky)</a>
 
 If clicking the link does not work, copy the contents of the file into a new script inside tampermonkey.
 
@@ -90,11 +90,11 @@ Step 1:
 
 Download the file below (click the link and when on that page right click the button that says "Raw" and Save Link As...), and save it as mods.js.
 
-<a href="https://github.com/SadAugust/AutoTrimps/blob/main/userFiles/farmCalc.user.js">Heirloom Calculator</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/blob/main/userFiles/farmCalc.user.js">Heirloom Calculator</a>
 
-<a href="https://github.com/SadAugust/AutoTrimps/blob/main/userFiles/heirloomCalc.user.js">Farm Calculator (zfarm)</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/blob/main/userFiles/heirloomCalc.user.js">Farm Calculator (zfarm)</a>
 
-<a href="https://github.com/SadAugust/AutoTrimps/blob/main/userFiles/autoPerks.user.js">Auto Perks (Perky+Surky)</a>
+<a href="https://github.com/SadAugust/AutoTrimps-Loader/blob/main/userFiles/autoPerks.user.js">Auto Perks (Perky+Surky)</a>
 
 Click on one of the mods selected below, then right click the Raw button, hit Save Link As, and save the file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)

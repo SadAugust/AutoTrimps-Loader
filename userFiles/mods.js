@@ -7,4 +7,4 @@ function injectScript(id, src) {
 }
 
 //This can be edited to point to your own Github Repository URL.
-injectScript('AutoTrimps-SadAugust', 'https://SadAugust.github.io/AutoTrimps/AutoTrimps2.js');
+injectScript('AutoTrimps-SadAugust', 'https://SadAugust.github.io/AutoTrimps-Loader/AutoTrimps2.js');

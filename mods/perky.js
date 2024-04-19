@@ -1160,7 +1160,7 @@ if (typeof autoTrimpSettings === 'undefined' || (typeof autoTrimpSettings !== 'u
 	const linkStylesheet = document.createElement('link');
 	linkStylesheet.rel = 'stylesheet';
 	linkStylesheet.type = 'text/css';
-	linkStylesheet.href = 'https://sadaugust.github.io/AutoTrimps/css/tabsStandalone.css';
+	linkStylesheet.href = 'https://SadAugust.github.io/AutoTrimps-Loader/css/tabsStandalone.css';
 	document.head.appendChild(linkStylesheet);
 
 	function injectScript(id, src) {
@@ -1171,7 +1171,7 @@ if (typeof autoTrimpSettings === 'undefined' || (typeof autoTrimpSettings !== 'u
 		document.head.appendChild(script);
 	}
 
-	injectScript('AutoTrimps-SadAugust_Surky', 'https://sadaugust.github.io/AutoTrimps/mods/surky.js');
+	injectScript('AutoTrimps-SadAugust_Surky', 'https://SadAugust.github.io/AutoTrimps-Loader/mods/surky.js');
 
 	/* Load the portal UI */
 	setTimeout(function () {

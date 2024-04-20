@@ -181,7 +181,7 @@ function calcCorruptionScale(zone = game.global.world, base = 10) {
 	return base * Math.pow(1.05, scales);
 }
 
-function calcSpire(what = 'attack', cell, name, checkCell) {
+function calcSpire(what = 'attack', cell, name, checkCell = false) {
 	if (!cell) {
 		const settingPrefix = trimpStats.isC3 ? 'c2' : trimpStats.isDaily ? 'd' : '';
 		const exitCell = typeof atSettings !== 'undefined' ? getPageSetting(settingPrefix + 'ExitSpireCell') : 100;
@@ -190,7 +190,8 @@ function calcSpire(what = 'attack', cell, name, checkCell) {
 
 	if (checkCell) return cell;
 
-	const spireNum = Math.floor((game.global.world - 100) / 100);
+	const startZone = game.global.universe === 2 ? 300 : 100;
+	const spireNum = Math.floor((game.global.world - startZone) / 100);
 
 	const gridInitialised = game.global.gridArray && game.global.gridArray.length > 0;
 	const enemy = name ? name : gridInitialised ? game.global.gridArray[cell - 1].name : 'Snimp';
@@ -712,12 +713,12 @@ function calcEnemyAttackCore(worldType = _getWorldType(), zone = _getZone(worldT
 	const gridInitialised = game.global.gridArray && game.global.gridArray.length > 0;
 	if (customAttack) {
 		attack = customAttack;
+	} else if (game.global.spireActive && worldType === 'world') {
+		attack = calcSpire('attack', cell, name);
 	} else if (game.global.universe === 1) {
 		if (worldType === 'world') {
 			const enemy = game.global.gridArray[cell - 1];
-			if (game.global.spireActive) {
-				attack = calcSpire('attack', cell, name);
-			} else if (gridInitialised && mutations.Corruption.active() && (enemy.mutation || enemy.empowerment)) {
+			if (gridInitialised && mutations.Corruption.active() && (enemy.mutation || enemy.empowerment)) {
 				if (enemy.mutation !== 'Magma') attack = corruptionBaseStats(cell - 1, zone, 'attack', true);
 
 				if (enemy.empowerment) attack *= 1.2;
@@ -890,12 +891,12 @@ function calcEnemyHealthCore(worldType = _getWorldType(), zone = _getZone(worldT
 
 	if (customHealth) {
 		health = customHealth;
+	} else if (game.global.spireActive && worldType === 'world') {
+		health = calcSpire('health', cell, name);
 	} else if (game.global.universe === 1) {
 		if (worldType === 'world') {
 			const enemy = game.global.gridArray[cell - 1];
-			if (game.global.spireActive) {
-				health = calcSpire('health', cell, name);
-			} else if (gridInitialised && mutations.Corruption.active() && (enemy.mutation || enemy.empowerment)) {
+			if (gridInitialised && mutations.Corruption.active() && (enemy.mutation || enemy.empowerment)) {
 				if (enemy.mutation !== 'Magma') health = corruptionBaseStats(cell - 1, zone, 'health', true);
 
 				if (enemy.empowerment) health *= 4;
@@ -995,7 +996,7 @@ function calcSpecificEnemyHealth(worldType = _getWorldType(), zone = _getZone(wo
 	return health;
 }
 
-function calcHDRatio(targetZone = game.global.world, worldType = 'world', maxTenacity = false, difficulty = 1, hdCheck = true, checkOutputs) {
+function calcHDRatio(targetZone = game.global.world, worldType = 'world', maxTenacity = false, difficulty = 1, hdCheck = true, checkOutputs = false) {
 	const heirloomToUse = heirloomShieldToEquip(worldType, false, hdCheck);
 	let enemyHealth = 0;
 	let universeSetting;
@@ -1006,9 +1007,9 @@ function calcHDRatio(targetZone = game.global.world, worldType = 'world', maxTen
 	if (worldType === 'world') {
 		let customHealth;
 		let enemyName = 'Turtlimp';
-		if (game.global.universe === 1) {
-			if (game.global.spireActive) customHealth = calcSpire('health');
-			else if (isCorruptionActive(targetZone)) customHealth = calcCorruptedStats(targetZone, 'health');
+		if (game.global.spireActive) customHealth = calcSpire('health');
+		else if (game.global.universe === 1) {
+			if (isCorruptionActive(targetZone)) customHealth = calcCorruptedStats(targetZone, 'health');
 		} else if (game.global.universe === 2) {
 			if (targetZone > 200) customHealth = calcMutationStats(targetZone, 'health');
 		}
@@ -1089,11 +1090,11 @@ function _calcHitsSurvivedAttack(worldType, targetZone) {
 	const { universe, spireActive, usingShriek } = game.global;
 	let customAttack;
 
-	if (universe === 1) {
-		if (spireActive) {
-			customAttack = calcSpire('attack');
-			if (exitSpireCell(true) === 100 && usingShriek) customAttack *= game.mapUnlocks.roboTrimp.getShriekValue();
-		} else if (isCorruptionActive(targetZone)) customAttack = calcCorruptedStats(targetZone, 'attack');
+	if (spireActive && worldType === 'world') {
+		customAttack = calcSpire('attack');
+		if (universe === 1 && usingShriek && exitSpireCell(true) === 100) customAttack *= game.mapUnlocks.roboTrimp.getShriekValue();
+	} else if (universe === 1) {
+		if (isCorruptionActive(targetZone)) customAttack = calcCorruptedStats(targetZone, 'attack');
 	} else if (universe === 2 && targetZone > 200) {
 		customAttack = calcMutationStats(targetZone, 'attack');
 	}
@@ -1139,8 +1140,11 @@ function calcCorruptedStats(targetZone = game.global.world, type = 'attack') {
 
 function mutationBaseStats(cell = game.global.lastClearedCell + 1, targetZone = game.global.world, type = 'attack', randomized = challengeActive('Randomized')) {
 	cell = game.global.gridArray[cell];
+	if (game.global.spireActive) return calcSpire(type, cell.level, cell.name);
+
 	const typeFunction = type === 'attack' ? calcEnemyBaseAttack : calcEnemyBaseHealth;
 	let baseStats = typeFunction('world', targetZone, cell.cs || cell.level, cell.name, true);
+	calcSpire('attack', cell.cs || cell.level, cell.name);
 	const addStats = cell.cc ? u2Mutations.types.Compression[type](cell, baseStats) : 0;
 	const statMult = type === 'attack' ? 1.01 : 1.02;
 
@@ -1299,7 +1303,10 @@ function equalityQuery(enemyName = 'Snimp', zone = game.global.world, currentCel
 	const unluckyDmg = runningUnlucky ? Number(calcOurDmg('min', 0, false, worldType, 'never', bionicTalent, titimp)) : 2;
 	const gammaToTrigger = gammaMaxStacks(false, false, worldType);
 
-	if (checkMutations) {
+	if (game.global.spireActive && worldType === 'world') {
+		enemyDmg = calcSpire('attack');
+		enemyHealth = calcSpire('health');
+	} else if (checkMutations) {
 		enemyDmg = calcEnemyAttack(worldType, zone, currentCell, enemyName, false, calcMutationStats(zone, 'attack'), 0);
 		enemyHealth = calcEnemyHealth(worldType, zone, currentCell, enemyName, calcMutationStats(zone, 'health'));
 	}

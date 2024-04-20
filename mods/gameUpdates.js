@@ -2625,14 +2625,14 @@ function startFight() {
 			}
 		}
 
-		if (game.global.universe === 1) {
-			if (game.global.spireActive && checkIfSpireWorld() && !game.global.mapsActive) {
-				cell.origAttack = cell.attack;
-				cell.origHealth = cell.health;
-				cell.attack = getSpireStats(cell.level, cell.name, 'attack');
-				cell.health = getSpireStats(cell.level, cell.name, 'health');
-			}
+		if (game.global.spireActive && checkIfSpireWorld() && !game.global.mapsActive) {
+			cell.origAttack = cell.attack;
+			cell.origHealth = cell.health;
+			cell.attack = getSpireStats(cell.level, cell.name, 'attack');
+			cell.health = getSpireStats(cell.level, cell.name, 'health');
+		}
 
+		if (game.global.universe === 1) {
 			if (cell.empowerment) {
 				if (cell.mutation !== 'Corruption') {
 					cell.health = mutations.Corruption.health(cell.level, cell.name);

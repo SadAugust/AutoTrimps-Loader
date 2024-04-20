@@ -421,7 +421,6 @@ function buyEquips() {
 	if (game.global.universe === 1) equipTypeList.push('block');
 	const equipTypes = equipTypeList.sort((a, b) => bestBuys[a].cost - bestBuys[b].cost);
 	let keepBuying = false;
-
 	const saveResources = {
 		metal: _shouldSaveResource('metal'),
 		wood: _shouldSaveResource('wood')

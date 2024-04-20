@@ -210,6 +210,7 @@ function shouldRunUniqueMap(map) {
 	if (!challengeActive('Scientist') || game.global.sLevel < 5) {
 		if (!trimpStats.isC3 && mapData.challenges.includes(trimpStats.currChallenge) && map.clears === 0 && !challengeActive('') && enoughHealth(map)) return true;
 	}
+
 	//Remove speed run check for now
 	/* if (mapData.speedrun && shouldSpeedRun(map, game.achievements[mapData.speedrun]) && enoughHealth(map) && enoughDamage(map)) {
 		return true;
@@ -869,7 +870,7 @@ function _tributeFarmShouldAncientTreasure(mapSpecial, jobRatio, mapLevel, tribu
 	const tributeConfig = {
 		goal: tributeGoal,
 		current: game.buildings.Tribute.purchased,
-		baseCost: 10000,
+		baseCost: 10000 * resourcefulMult(),
 		increment: 1.05
 	};
 
@@ -899,6 +900,7 @@ function _tributeFarmShouldAncientTreasure(mapSpecial, jobRatio, mapLevel, tribu
 	if (totalCostExceedsFarm && ownedFoodExceedsHalfCost) {
 		_runUniqueMap(getAncientTreasureName());
 	}
+
 	return totalCost;
 }
 
@@ -962,8 +964,9 @@ function _smithyFarmCalculateGoal(setting, mapLevel, smithyGoal) {
 
 	if (woodSmithies > 0 && metalSmithies > 0) {
 		const smithyCount = Math.min(woodSmithies, metalSmithies);
-		const woodCost = getBuildingItemPrice(game.buildings.Smithy, 'wood', false, smithyCount - game.buildings.Smithy.purchased);
-		const metalCost = getBuildingItemPrice(game.buildings.Smithy, 'metal', false, smithyCount - game.buildings.Smithy.purchased);
+		const resourcefulMult = getResourcefulMult();
+		const woodCost = getBuildingItemPrice(game.buildings.Smithy, 'wood', false, smithyCount - game.buildings.Smithy.purchased) * resourcefulMult;
+		const metalCost = getBuildingItemPrice(game.buildings.Smithy, 'metal', false, smithyCount - game.buildings.Smithy.purchased) * resourcefulMult;
 		const woodMapCount = Math.floor((woodCost - game.resources.wood.owned) / (woodBase * 34));
 		const metalMapCount = Math.floor((metalCost - game.resources.metal.owned) / (metalBase * 34));
 		smithyGoal = woodMapCount + metalMapCount > smithyGoal ? smithyCount - 1 : smithyCount;
@@ -1000,8 +1003,9 @@ function _runSmithyFarm(setting, mapName, settingName, settingIndex) {
 	}
 
 	if (smithyGoal > game.buildings.Smithy.purchased) {
+		const resourcefulMult = getResourcefulMult();
 		resources.forEach((resource) => {
-			const smithyCost = getBuildingItemPrice(game.buildings.Smithy, resource, false, smithyGoal - game.buildings.Smithy.purchased);
+			const smithyCost = getBuildingItemPrice(game.buildings.Smithy, resource, false, smithyGoal - game.buildings.Smithy.purchased) * resourcefulMult;
 			if (smithyCost > game.resources[resource].owned) {
 				farmStatus[resource] = true;
 				shouldMap = true;
@@ -1283,8 +1287,8 @@ function prestigeClimb(lineCheck) {
 }
 
 function _raidingTargetPrestige(setting) {
-	const isMapologyActive = challengeActive('Mapology') && getPageSetting('mapology');
-	const targetPrestige = isMapologyActive ? autoTrimpSettings['mapologyPrestige'].selected : setting.prestigeGoal && setting.prestigeGoal !== 'All' ? MODULES.equipment[setting.prestigeGoal].upgrade : 'GamesOP';
+	const mapologyActive = challengeActive('Mapology') && getPageSetting('mapology');
+	const targetPrestige = mapologyActive ? getPageSetting('mapologyPrestige') : setting.prestigeGoal && setting.prestigeGoal !== 'All' ? MODULES.equipment[setting.prestigeGoal].upgrade : 'GamesOP';
 	return targetPrestige;
 }
 
@@ -1484,8 +1488,8 @@ function _restartRaidingProcedure() {
 
 function findLastBionicWithItems(bionicPool) {
 	if (game.global.world < 115 || !bionicPool) return;
-	const isMapologyActive = challengeActive('Mapology') && getPageSetting('mapology');
-	const targetPrestige = isMapologyActive ? getPageSetting('mapologyPrestige') : mapSettings.mapName === 'Bionic Raiding' && mapSettings.prestigeGoal ? mapSettings.prestigeGoal : 'GambesOP';
+	const mapologyActive = challengeActive('Mapology') && getPageSetting('mapology');
+	const targetPrestige = mapologyActive ? getPageSetting('mapologyPrestige') : mapSettings.mapName === 'Bionic Raiding' && mapSettings.prestigeGoal ? mapSettings.prestigeGoal : 'GambesOP';
 
 	if (bionicPool.length <= 1) return bionicPool[0];
 

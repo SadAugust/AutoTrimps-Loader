@@ -178,11 +178,11 @@ fadeIn = function () {
 function suicideTrimps() {
 	//Throw this in so that if GS updates anything in there it won't cause AT to fuck with it till I can check it out
 	//Check out mapsClicked(confirmed) && mapsSwitch(updateOnly, fromRecycle) patch notes for any changes to this section!
-	if (game.global.stringVersion > '5.9.5') {
+	if (game.global.stringVersion > '5.10.12') {
 		mapsClicked();
 		return;
 	}
-
+	if (game.global.spireActive && !game.global.mapsActive && game.global.fighting) deadInSpire();
 	if (game.resources.trimps.soldiers > 0) {
 		game.global.soldierHealth = 0;
 		game.stats.trimpsKilled.value += game.resources.trimps.soldiers;

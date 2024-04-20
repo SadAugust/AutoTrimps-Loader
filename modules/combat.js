@@ -334,7 +334,7 @@ function _checkSuicideArmy(worldType, mapping, ourHealth, enemy, enemyDmgMax) {
 	const runningArchaeology = challengeActive('Archaeology');
 	const runningBerserk = challengeActive('Berserk') && game.challenges.Berserk.weakened !== 20;
 
-	if (runningTrappa || runningArchaeology || runningBerserk) return ourHealth;
+	if (runningTrappa || runningArchaeology || runningBerserk || game.global.spireActive) return ourHealth;
 
 	const armyReady = newArmyRdy() || getPageSetting('heirloomBreed') !== 'undefined';
 	const isDaily = challengeActive('Daily');
@@ -377,7 +377,7 @@ function _checkSuicideArmy(worldType, mapping, ourHealth, enemy, enemyDmgMax) {
 	const angelicOwned = game.talents.angelic.purchased;
 	const frenzyCanExpire = getPerkLevel('Frenzy') > 0 && !autoBattle.oneTimers.Mass_Hysteria.owned && game.portal.Frenzy.frenzyActive();
 	const runningRevenge = challengeActive('Revenge');
-	const angelicDance = angelicOwned && (runningTrappa || runningRevenge || runningBerserk || frenzyCanExpire || dailyEmpower);
+	const angelicDance = angelicOwned && (runningTrappa || runningRevenge || runningBerserk || frenzyCanExpire || dailyEmpower || game.global.spireActive);
 	ourHealth = remainingHealth(shieldBreak, angelicDance, worldType);
 
 	return ourHealth;

@@ -154,7 +154,7 @@ function loadScriptsAT() {
 	(async function () {
 		try {
 			const modules = ['versionNumber', ...atSettings.modules.installedMods, ...atSettings.modules.installedModules, 'SettingsGUI'];
-			const scripts = ['https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', 'https://Quiaaaa.github.io/AutoTrimps/Graphs.js'];
+			const scripts = ['https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js'];
 			const stylesheets = ['https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', `${atSettings.initialise.basepath}css/tabs.css`];
 
 			await loadModules('gameUpdates', atSettings.modules.pathMods);
@@ -174,6 +174,8 @@ function loadScriptsAT() {
 				await loadStylesheet(stylesheet);
 			}
 
+			await loadModules('graphs', atSettings.modules.pathMods);
+
 			initialiseScript();
 		} catch (error) {
 			console.error('Error loading script or stylesheet:', error);
@@ -189,7 +191,7 @@ function initialiseScript() {
 		main: atSettings.modules.installedMain.length > atSettings.modules.loadedMain.length,
 		modules: atSettings.modules.installedModules.length > atSettings.modules.loadedModules.length,
 		mods: atSettings.modules.installedMods.length > atSettings.modules.loadedMods.length,
-		externalScripts: 5 > atSettings.modules.loadedExternal.length
+		externalScripts: 4 > atSettings.modules.loadedExternal.length
 	};
 
 	if (Object.values(filesNotLoaded).some(Boolean)) {

@@ -57,7 +57,7 @@ function getZoneEmpowerment(zone) {
 }
 
 function fluffyEvolution() {
-	if (game.global.universe !== 1 || Fluffy.currentLevel !== 10 || game.global.fluffyPrestige === 10 || !getPageSetting('fluffyEvolve')) return;
+	if (game.global.universe !== 1 || Fluffy.currentLevel !== 10 || game.global.fluffyPrestige === (game.global.finaleChallDone ? 20 : 10) || !getPageSetting('fluffyEvolve')) return;
 	if (game.global.world < getPageSetting('fluffyMinZone')) return;
 	if (game.global.world > getPageSetting('fluffyMaxZone')) return;
 

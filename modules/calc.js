@@ -402,14 +402,27 @@ function calcOurBlock(stance = false, realBlock = false, worldType = _getWorldTy
 	return block;
 }
 
-function _getAnticipationBonus(stacks = game.global.antiStacks, currentBonus = false) {
+function _getAnticipationBonus(stacks = game.global.antiStacks, currentBonus = false, breedtimer = false) {
 	if (challengeActive('Finale')) return 1;
 
-	const maxStacks = game.talents.patience.purchased ? 45 : 30;
+	let maxStacks = game.talents.patience.purchased ? 45 : 30;
+	if (breedtimer) maxStacks = Math.min(breedtimer, maxStacks);
 	const perkMult = getPerkLevel('Anticipation') * getPerkModifier('Anticipation');
 	const stacks45 = typeof autoTrimpSettings === 'undefined' ? maxStacks : currentBonus ? false : getPageSetting('45stacks');
 
 	return stacks45 ? 1 + maxStacks * perkMult : 1 + stacks * perkMult;
+}
+
+function _getRampageBonus(maxStacks = false) {
+	if (!challengeActive('Daily') || typeof game.global.dailyChallenge.rampage === 'undefined') return 1;
+
+	const { strength, stacks } = game.global.dailyChallenge.rampage;
+
+	if (maxStacks) {
+		return dailyModifiers.rampage.getMult(strength, dailyModifiers.rampage.getMaxStacks(strength));
+	}
+
+	return dailyModifiers.rampage.getMult(strength, stacks);
 }
 
 function _getTrimpIceMult(realDamage) {
@@ -597,14 +610,12 @@ function calcOurDmg(minMaxAvg = 'avg', universeSetting, realDamage = false, worl
 	if (challengeActive('Daily')) {
 		if (game.talents.daily.purchased) attack *= 1.5;
 
-		const dailyChallenge = game.global.dailyChallenge;
 		const worldLevel = game.global.world + (worldType !== 'map' ? mapLevel : 0);
 
 		minFluct -= applyDailyMultipliers('minDamage', 0);
 		maxFluct += applyDailyMultipliers('maxDamage', 0);
 		if (worldLevel % 2 === 1) attack *= applyDailyMultipliers('oddTrimpNerf', 1);
 		if (worldLevel % 2 === 0) attack *= applyDailyMultipliers('evenTrimpBuff', 1);
-		if (worldType === 'map' && typeof game.global.dailyChallenge.rampage !== 'undefined') attack *= dailyModifiers.rampage.getMult(dailyChallenge.rampage.strength, dailyModifiers.rampage.getMaxStacks(dailyChallenge.rampage.strength));
 	}
 
 	critMode = runningAutoTrimps && getPageSetting('floorCritCalc') ? 'never' : critMode || 'never';
@@ -862,11 +873,12 @@ function calcEnemyBaseHealth(worldType = _getWorldType(), zone = _getZone(worldT
 	if (game.global.druopitinityDefeated) health /= Math.pow(1.19, 13 * game.global.druopitinityDefeated);
 
 	if (zone === 1 || (zone === 2 && cell < 10)) {
-		health *= 0.6 * (0.25 + 0.72 * (cell / 100));
+		health *= 0.6;
+		health = health * 0.25 + health * 0.72 * (cell / 100);
 	} else if (zone < 60) {
 		health *= 0.4 * (1 + cell / 110);
 	} else {
-		health *= 0.5 + 0.008 * cell;
+		health = health * 0.5 + health * 0.8 * (cell / 100);
 		health *= Math.pow(1.1, zone - 59);
 	}
 
@@ -1041,7 +1053,15 @@ function calcHDRatio(targetZone = game.global.world, worldType = 'world', maxTen
 
 	const maxGammaStacks = gammaMaxStacks(false, true, worldType) - 1;
 
-	if (challengeActive('Daily') && typeof game.global.dailyChallenge.weakness !== 'undefined' && maxGammaStacks !== Infinity) ourBaseDamage *= 1 - (Math.max(1, maxGammaStacks) * game.global.dailyChallenge.weakness.strength) / 100;
+	if (challengeActive('Daily')) {
+		if (typeof game.global.dailyChallenge.weakness !== 'undefined' && maxGammaStacks !== Infinity) {
+			ourBaseDamage *= 1 - (Math.max(1, maxGammaStacks) * game.global.dailyChallenge.weakness.strength) / 100;
+		}
+
+		if (worldType === 'map' && typeof game.global.dailyChallenge.rampage !== 'undefined') {
+			ourBaseDamage *= _getRampageBonus(true);
+		}
+	}
 
 	if ((worldType !== 'map' && game.global.universe === 2 && universeSetting < getPerkLevel('Equality') - 14) || game.global.universe === 1) ourBaseDamage *= MODULES.heirlooms.gammaBurstPct;
 
@@ -1319,7 +1339,15 @@ function equalityQuery(enemyName = 'Snimp', zone = game.global.world, currentCel
 	}
 	if (challengeActive('Duel')) ourDmg *= MODULES.heirlooms.gammaBurstPct;
 
-	if (isDaily && typeof game.global.dailyChallenge.weakness !== 'undefined') ourDmg *= 1 - ((worldType === 'map' ? 9 : gammaToTrigger) * game.global.dailyChallenge.weakness.strength) / 100;
+	if (isDaily) {
+		if (typeof game.global.dailyChallenge.weakness !== 'undefined') {
+			ourDmg *= 1 - ((worldType === 'map' ? 9 : gammaToTrigger) * game.global.dailyChallenge.weakness.strength) / 100;
+		}
+
+		if (worldType === 'map' && typeof game.global.dailyChallenge.rampage !== 'undefined') {
+			ourDmg *= _getRampageBonus(true);
+		}
+	}
 
 	let ourDmgEquality = 0;
 	let enemyDmgEquality = 0;

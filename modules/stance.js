@@ -238,8 +238,8 @@ function unlockedStances() {
 
 function getBaseStats() {
 	let stats = {
-		minDamage: calcOurDmg('min', 'X', false, false, 'never'),
-		maxDamage: calcOurDmg('max', 'X', false, false, 'force'),
+		minDamage: calcOurDmg('min', 'X', false, undefined, 'never'),
+		maxDamage: calcOurDmg('max', 'X', false, undefined, 'force'),
 		health: calcOurHealth(false, false, true),
 		block: calcOurBlock(false)
 	};
@@ -251,6 +251,12 @@ function getBaseStats() {
 		const ratio = antiBonusCurr / antiBonus;
 		stats.minDamage *= ratio;
 		stats.maxDamage *= ratio;
+	}
+
+	const dailyRampageMult = _getRampageBonus();
+	if (dailyRampageMult > 1) {
+		stats.minDamage *= dailyRampageMult;
+		stats.maxDamage *= dailyRampageMult;
 	}
 
 	return stats;
@@ -461,7 +467,7 @@ function scryTransition(scryStance = 'S', scrySettings = scrySettings(), baseSta
 	if (valid_min && valid_max && (!game.global.mapsActive || scrySettings.MinMaxWorld === 0)) {
 		//Smooth transition to S before killing the target
 		if (transitionRequired) {
-			const xStance = availableStances.includes('W') && !getEmpowerment('Wind') ? 5 : 0;
+			const xStance = availableStances.includes('W') && getEmpowerment() !== 'Wind' ? 5 : 0;
 			const stances = [
 				{ stance: 'X', value: xStance },
 				{ stance: 'H', value: 1 }
@@ -527,7 +533,7 @@ function autoStanceAdvanced(baseStats = getBaseStats(), availableStances = unloc
 	if (typeof currentEnemy === 'undefined') return;
 
 	const critSources = getCritPower(currentEnemy);
-	const checkWind = availableStances.includes('W') && !getEmpowerment('Wind');
+	const checkWind = availableStances.includes('W') && getEmpowerment() !== 'Wind';
 	let prefferedStance = availableStances.includes('D') ? 'D' : 'X';
 
 	if (availableStances.includes('S')) {

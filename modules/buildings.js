@@ -369,7 +369,6 @@ function _buyNursery(buildingSettings) {
 		} else if (advNurseries) {
 			safeBuyBuilding('Nursery', Math.min(nurseryCanAfford, getPageSetting('advancedNurseriesAmount')));
 		} else if (nurseryToBuy > 0) {
-			console.log('here');
 			safeBuyBuilding('Nursery', nurseryToBuy);
 		}
 	}

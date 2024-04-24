@@ -1295,6 +1295,7 @@ function initialiseAllSettings() {
 			function () {
 				let description = "<p>Enabling this will give you settings to allow you to wind stack in your runs.</p>";
 				description += "<p>Will use your regular <b>Auto Stance</b> setting when outside of zones you're wind stacking in.</p>";
+				description += "<p>The script evaluates the use of wind stance based on these settings. It examines the cells from the current one up to the maximum overkill range in scryer stance. If none of these cells contain enemies that drop helium, the script switches to scryer stance instead</p>";
 				description += "<p>If running a daily challenge then you will need to setup the windstacking settings in the <b>Daily</b> tab.</p>";
 				description += "<p><b>Recommended:</b> On</p>";
 				return description;
@@ -1443,6 +1444,13 @@ function initialiseAllSettings() {
 				description += "<p><b>Recommended:</b> 2</p>";
 				return description;
 			}, 'value', 2, null, 'Maps', [1, 2]);
+			
+		createSetting('mapBonusLevelType',
+			function () { return ('HS/HD Map Bonus Type') },
+			function () {
+				let description = "<p>Will swap the auto level type that both Hits Survived & HD Ratio use for map bonus maps from loot maps to speed maps.</p>";
+				return description;
+			}, 'boolean', false, null, 'Maps', [1, 2]);
 
 		/* Does this work as intended? Must query Ray for info */
 		/* createSetting('mapBonusPrestige',
@@ -2802,6 +2810,7 @@ function initialiseAllSettings() {
 			function () {
 				let description = "<p>Enabling this will give you settings to allow you to wind stack in your runs.</p>";
 				description += "<p>Will use your regular <b>Auto Stance</b> setting when outside of zones you're wind stacking in.</p>";
+				description += "<p>The script evaluates the use of wind stance based on these settings. It examines the cells from the current one up to the maximum overkill range in scryer stance. If none of these cells contain enemies that drop helium, the script switches to scryer stance instead</p>";
 				description += "<p><b>Recommended:</b> On</p>";
 				return description;
 			}, 'boolean', false, null, 'Daily', [1],

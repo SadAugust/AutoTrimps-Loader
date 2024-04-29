@@ -376,10 +376,10 @@ function shouldScryerStance(availableStances = unlockedStances(), baseStats = ge
 	const mapObject = mapsActive ? getCurrentMapObject() : null;
 	const nextEnemy = getCurrentEnemy(2);
 
+	if (currentEnemy && scryOverkill(scrySettings, scryStance)) return true;
+
 	const [transitionRequired, never_scry] = scryNever(scrySettings, mapObject, currentEnemy, nextEnemy, empowerment, aboveMaxZone);
 	if (never_scry) return false;
-
-	if (currentEnemy && scryOverkill(scrySettings, mapsActive, scryStance)) return true;
 
 	if (scryForce(scrySettings, mapObject, currentEnemy, empowerment, scryStance)) return true;
 
@@ -399,8 +399,8 @@ function _getScrySettings() {
 		}, {});
 }
 
-function scryOverkill(scrySettings = scrySettings(), mapsActive = game.global.mapsActive, scryStance = 'S') {
-	const useOverkill = getPageSetting('scryerOverkill') && !(scrySettings.Spire === 0 && !mapsActive && isDoingSpire());
+function scryOverkill(scrySettings = scrySettings(), scryStance = 'S') {
+	const useOverkill = getPageSetting('scryerOverkill') && !(scrySettings.Spire === 0 && !game.global.mapsActive && isDoingSpire());
 
 	if (useOverkill) {
 		//Switches to S/W if it has enough damage to secure an overkill

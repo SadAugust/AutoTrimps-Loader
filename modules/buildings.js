@@ -26,10 +26,13 @@ function advancedNurseries() {
 
 	// Only build nurseries if: A) lacking Health & B) have max health map stacks
 	const lackingHealth = whichHitsSurvived() < targetHitsSurvived();
-	const hasHealthFarmed = MODULES.mapFunctions.hasHealthFarmed === getTotalPortals() + '_' + game.global.world;
-	const maxMapBonus = game.global.mapBonus >= getPageSetting('mapBonusHealth');
+	if (!lackingHealth) return false;
 
-	return lackingHealth && (hasHealthFarmed || maxMapBonus);
+	const portalZoneCheck = getTotalPortals() + '_' + game.global.world;
+	const { hasHealthFarmed, isHealthFarming } = game.global.addonUser.mapFunctions;
+	if (hasHealthFarmed === portalZoneCheck || isHealthFarming === portalZoneCheck) return true;
+	const maxMapBonus = game.global.mapBonus >= getPageSetting('mapBonusHealth');
+	return maxMapBonus;
 }
 
 function _housingToCheck(displayCheck = false) {

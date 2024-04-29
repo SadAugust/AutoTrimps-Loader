@@ -1,6 +1,5 @@
 MODULES.mapFunctions = {
 	afterVoids: false,
-	hasHealthFarmed: '',
 	hasVoidFarmed: '',
 	runUniqueMap: '',
 	questRun: false,
@@ -3026,11 +3025,11 @@ function hdFarm(lineCheck, skipHealthCheck, voidFarm) {
 	const currentPortal = getTotalPortals() + '_' + game.global.world;
 	const hitsSurvivedGoal = targetHitsSurvived(true);
 
-	if (!skipHealthCheck && MODULES.mapFunctions.hasHealthFarmed === currentPortal) {
-		if (hitsSurvivedGoal > 0 && hitsSurvivedGoal * 0.8 > hdStats.hitsSurvived) MODULES.mapFunctions.hasHealthFarmed = '';
+	if (!skipHealthCheck && game.global.addonUser.mapFunctions.hasHealthFarmed === currentPortal) {
+		if (hitsSurvivedGoal > 0 && hitsSurvivedGoal * 0.8 > hdStats.hitsSurvived) game.global.addonUser.mapFunctions.hasHealthFarmed = '';
 	}
 
-	const hitsSurvivedCheck = !skipHealthCheck && allowMapping && MODULES.mapFunctions.hasHealthFarmed !== currentPortal;
+	const hitsSurvivedCheck = !skipHealthCheck && allowMapping && game.global.addonUser.mapFunctions.hasHealthFarmed !== currentPortal;
 	const shouldHitsSurvived = hitsSurvivedCheck && hitsSurvivedGoal > 0 && (hdStats.hitsSurvived < hitsSurvivedGoal || (mapSettings.mapName === 'Hits Survived' && mapSettings.priority === Infinity));
 
 	const hdRatioSetting = getPageSetting('mapBonusRatio');
@@ -3127,6 +3126,13 @@ function _runHDFarm(setting, mapName, settingName, settingIndex, defaultSettings
 		const minLevel = shouldMapBonus ? 0 - getPerkLevel('Siphonology') : null;
 		mapLevel = autoLevelCheck(mapName, mapSpecial, null, minLevel);
 		if (setting.repeat && minLevel > mapLevel) return farmingDetails;
+	}
+
+	if (mapSettings.mapName.includes('Hits Survived') && game.global.mapRunCounter >= Math.min(mapsRunCap, getPageSetting('advancedNurseriesMapCap'))) {
+		const portalZoneCheck = getTotalPortals() + '_' + game.global.world;
+		if (game.global.addonUser.mapFunctions.isHealthFarming !== portalZoneCheck) {
+			game.global.addonUser.mapFunctions.isHealthFarming = portalZoneCheck;
+		}
 	}
 
 	const hdTypeMap = {
@@ -3638,7 +3644,7 @@ function resetMapVars(setting, settingName) {
 	MODULES.maps.mapRepeatsSmithy = [0, 0, 0];
 
 	if (mapSettings.voidFarm) MODULES.mapFunctions.hasVoidFarmed = `${totalPortals}_${game.global.world}`;
-	if (setting && setting.hitsSurvivedFarm) MODULES.mapFunctions.hasHealthFarmed = `${totalPortals}_${game.global.world}`;
+	if (setting && setting.hitsSurvivedFarm) game.global.addonUser.mapFunctions.hasHealthFarmed = `${totalPortals}_${game.global.world}`;
 
 	if (setting && settingName && setting.row) {
 		const value = game.global.universe === 2 ? 'valueU2' : 'value';

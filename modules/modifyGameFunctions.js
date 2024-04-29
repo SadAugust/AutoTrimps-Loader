@@ -38,6 +38,7 @@ resetGame = function () {
 	try {
 		atlantrimpRespecOverride();
 		_setButtonsPortal();
+		setupAddonUser(true);
 	} catch (e) {
 		debug(`Load save failed: ${e}`);
 	}
@@ -69,6 +70,23 @@ startFight = function () {
 		heirloomSwapping(true);
 	}
 	originalstartFight(...arguments);
+};
+
+Fluffy.originalisRewardActive = Fluffy.isRewardActive;
+Fluffy.isRewardActive = function () {
+	if (typeof trimpStats !== 'undefined' && typeof trimpStats.fluffyRewards !== 'undefined') {
+		const fluffyLevel = Fluffy.getCurrentPrestige() + (game.talents.fluffyAbility.purchased ? 1 : 0) + Fluffy.currentLevel;
+
+		if (trimpStats.fluffyRewards.universe !== game.global.universe || trimpStats.fluffyRewards.level !== fluffyLevel) {
+			trimpStats.fluffyRewards = updateFluffyRewards();
+		}
+
+		if (typeof trimpStats.fluffyRewards[arguments[0]] !== 'undefined') {
+			return trimpStats.fluffyRewards[arguments[0]];
+		}
+	}
+
+	Fluffy.originalisRewardActive(...arguments);
 };
 
 //Attach AT related buttons to the main TW UI.

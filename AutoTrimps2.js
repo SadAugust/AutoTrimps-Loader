@@ -11,7 +11,7 @@ const atSettings = {
 		installedMain: ['versionNumber', 'SettingsGUI'],
 		loadedMain: [],
 		installedMods: ['spireTD', 'heirloomCalc', 'farmCalc', 'mutatorPreset', 'perky', 'surky'],
-		installedModules: ['import-export', 'query', 'modifyGameFunctions', 'mapFunctions', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'combat', 'magmite', 'nature', 'other', 'fight-info', 'performance', 'bones', 'MAZ', 'minigames', 'utils'],
+		installedModules: ['import-export', 'utils', 'query', 'modifyGameFunctions', 'mapFunctions', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'combat', 'magmite', 'nature', 'other', 'fight-info', 'performance', 'bones', 'MAZ', 'minigames'],
 		loadedModules: [],
 		loadedMods: [],
 		loadedExternal: []

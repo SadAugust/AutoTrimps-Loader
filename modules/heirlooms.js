@@ -115,7 +115,7 @@ function heirloomSearch(heirloom) {
 function heirloomModSearch(heirloom, modifier) {
 	const heirloomName = getPageSetting(heirloom);
 	const heirloomDetails = heirloomSearch(heirloom);
-	const heirloomsToCheck = [game.global.ShieldEquipped, game.global.StaffEquipped];
+	const heirloomsToCheck = [game.global.ShieldEquipped, game.global.StaffEquipped, game.global.CoreEquipped];
 
 	if (heirloomDetails) heirloomsToCheck.push(heirloomDetails);
 
@@ -326,19 +326,42 @@ function getMapBonusHeirloomStaff(mapBonus) {
 	}
 }
 
+function heirloomCoreToEquip(worldType = _getWorldType()) {
+	if (!getPageSetting('heirloom') || !getPageSetting('heirloomCore')) return;
+
+	if (worldType === 'world') return getWorldHeirloomCore();
+	return getMapHeirloomCore(worldType);
+}
+
+function getWorldHeirloomCore() {
+	if (getPageSetting('heirloomCoreWorld') !== 'undefined') return 'heirloomCoreWorld';
+}
+
+function getMapHeirloomCore(worldType = _getWorldType()) {
+	if (worldType === 'void' && getPageSetting('heirloomCoreVoid') !== 'undefined') return 'heirloomCoreVoid';
+	if (getPageSetting('heirloomCoreMap') !== 'undefined') return 'heirloomCoreMap';
+
+	return false;
+}
+
 function heirloomSwapping(sendingArmy = false) {
 	if (!getPageSetting('heirloom')) return;
 
-	const mapType = _getWorldType();
+	const worldType = _getWorldType();
 
 	if (getPageSetting('heirloomShield')) {
-		const shield = heirloomShieldToEquip(mapType, true, true, sendingArmy);
+		const shield = heirloomShieldToEquip(worldType, true, true, sendingArmy);
 		if (shield) heirloomEquip(shield, 'Shield');
 	}
 
 	if (getPageSetting('heirloomStaff')) {
 		const staff = heirloomStaffToEquip();
 		if (staff) heirloomEquip(staff, 'Staff');
+	}
+
+	if (getPageSetting('heirloomCore')) {
+		const core = heirloomCoreToEquip(worldType);
+		if (core) heirloomEquip(core, 'Core');
 	}
 }
 

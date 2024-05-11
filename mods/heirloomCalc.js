@@ -765,6 +765,7 @@ class Heirloom {
 			loadCore(this);
 			const before = getMaxEnemyHP();
 			const beforeRS = estimatedMaxDifficulty(getMaxEnemyHP()).runestones;
+
 			loadCore(this, type, value + stepAmount);
 			const after = getMaxEnemyHP();
 			const afterRS = estimatedMaxDifficulty(getMaxEnemyHP()).runestones;
@@ -773,6 +774,7 @@ class Heirloom {
 			if (type === 'runestones') return (afterRS / beforeRS - 1) * 0.971 + 1;
 			return after / before;
 		}
+
 		return 0;
 	}
 
@@ -1180,16 +1182,20 @@ function autoUpgradeHeirlooms() {
 	for (let i = 0; i < game.global.heirloomsCarried.length; i++) {
 		if (getTotalHeirloomRefundValue(game.global.heirloomsCarried[i], true) === 0) continue;
 		game.global.selectedHeirloom = [i, 'heirloomsCarried'];
+
 		runHeirlooms();
 	}
+
 	if (!isObjectEmpty(game.global.ShieldEquipped) && Object.keys(game.global.ShieldEquipped).length !== 1 && getTotalHeirloomRefundValue(game.global.ShieldEquipped, true) > 0) {
 		game.global.selectedHeirloom = [-1, 'ShieldEquipped'];
 		runHeirlooms();
 	}
+
 	if (!isObjectEmpty(game.global.StaffEquipped) && Object.keys(game.global.StaffEquipped).length !== 1 && getTotalHeirloomRefundValue(game.global.StaffEquipped, true) > 0) {
 		game.global.selectedHeirloom = [-1, 'StaffEquipped'];
 		runHeirlooms();
 	}
+
 	if (!isObjectEmpty(game.global.CoreEquipped) && Object.keys(game.global.CoreEquipped).length !== 1 && getTotalHeirloomRefundValue(game.global.CoreEquipped, true) > 0) {
 		game.global.selectedHeirloom = [-1, 'CoreEquipped'];
 		runHeirlooms();
@@ -1218,6 +1224,11 @@ function runHeirlooms() {
 	if (selectedLoom[1].includes('Equipped')) startingHeirloom = game.global[selectedLoom[1]];
 	else startingHeirloom = game.global[selectedLoom[1]][selectedLoom[0]];
 	startingHeirloom.mods = heirlooms.newLoom.mods;
+
+	if (startingHeirloom.type.includes('Core') && startingHeirloom.rarity === 8) {
+		return;
+	}
+
 	displaySelectedHeirloom(true);
 
 	setupHeirloomHelpBtn();
@@ -1381,6 +1392,8 @@ function loadCore(core, overwrite, overwriteValue) {
 		};
 
 		for (const mod of core.mods) {
+			if (mod[0] === 'empty') continue;
+
 			const bonus = mod[1];
 			traps[modNamesToTraps[mod[0]]].coreMult = 1 + bonus / 100;
 		}

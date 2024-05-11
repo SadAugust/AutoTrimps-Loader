@@ -3321,6 +3321,47 @@ function initialiseAllSettings() {
 			}, 'textValue', 'undefined', null, 'Heirloom', [2],
 			function () { return (getPageSetting('heirloom', currSettingUniverse) && getPageSetting('heirloomStaff', currSettingUniverse)) });
 
+		createSetting('heirloomCore',
+			function () { return ('Cores') },
+			function () {
+				let description = "<p>Switch for enabling Core heirloom swapping.</p>";
+				description += "<p>Additional settings appear when enabled.</p>";
+				description += "<p><b>Recommended:</b> On</p>";
+				return description;
+			}, 'boolean', false, null, 'Heirloom', [1, 2],
+			function () { return (getPageSetting('heirloom', currSettingUniverse)) });
+
+		createSetting('heirloomCoreWorld',
+			function () { return ('World') },
+			function () {
+				let description = "<p>The Core to use when in world zones.</p>";
+				description += "<p>Set to <b>undefined</b> to disable.</p>";
+				description += "<p><b>Recommended:</b> High pet XP Core</p>";
+				return description;
+			}, 'textValue', 'undefined', null, 'Heirloom', [1, 2],
+			function () { return (getPageSetting('heirloom', currSettingUniverse) && getPageSetting('heirloomCore', currSettingUniverse)) });
+
+		createSetting('heirloomCoreMap',
+			function () { return ('Map') },
+			function () {
+				let description = "<p>The Core to use when running maps.</p>";
+				description += "<p>Set to <b>undefined</b> to disable.</p>";
+				description += "<p>Will be overridden by the cache heirloom settings if they've been setup.</p>";
+				description += "<p><b>Recommended:</b> Resource efficiency heavy Core</p>";
+				return description;
+			}, 'textValue', 'undefined', null, 'Heirloom', [1, 2],
+			function () { return (getPageSetting('heirloom', currSettingUniverse) && getPageSetting('heirloomCore', currSettingUniverse)) });
+
+		createSetting('heirloomCoreVoid',
+			function () { return ('Void') },
+			function () {
+				let description = "<p>The Core to use when running <b>Void</b> maps.</p>";
+				description += "<p>Set to <b>undefined</b> to disable.</p>";
+				description += "<p><b>Recommended:</b> Dedicated metal efficiency Core</p>";
+				return description;
+			}, 'textValue', 'undefined', null, 'Heirloom', [1, 2],
+			function () { return (getPageSetting('heirloom', currSettingUniverse) && getPageSetting('heirloomCore', currSettingUniverse)) });
+
 		createSetting('heirloomAuto',
 			function () { return ('Auto Heirlooms') },
 			function () {
@@ -5082,7 +5123,7 @@ function _settingsToLineBreak() {
 	const breakAfterC2 = ['c2disableFinished', 'c2Fused', 'c2AutoDStanceSpire', 'duelShield', 'trapperWorldStaff', 'mapologyPrestige', 'lead', 'frigidSwapZone', 'experienceEndBW', 'witherShield', 'questSmithyMaps', 'mayhemSwapZone', 'stormStacks', 'berserkDisableMapping', 'pandemoniumSwapZone', 'glassStacks', 'desolationSettings'];
 	const breakAfterBuildings = ['autoGigaDeltaFactor'];
 	const breakAfterChallenges = ['balanceImprobDestack', 'buble', 'decayStacksToAbandon', 'lifeStacks', 'toxicitySettings', 'archaeologyString3', 'exterminateWorldStaff'];
-	const breakAfterHeirlooms = ['heirloomCompressedSwap', 'heirloomWindStack', 'heirloomSwapHDCompressed', 'heirloomStaffFragment', 'heirloomStaffScience'];
+	const breakAfterHeirlooms = ['heirloomCompressedSwap', 'heirloomWindStack', 'heirloomSwapHDCompressed', 'heirloomStaffFragment', 'heirloomStaffScience', 'heirloomCoreVoid'];
 	const breakAfterMagma = ['autoGenModeC2', 'magmiteMinimize'];
 	const breakAfterNature = ['autoIce', 'autoenlight', 'iceEnlight', 'iceEnlightDaily'];
 	const breakAfterDisplay = ['EnableAFK', 'shieldGymMostEfficientDisplay'];

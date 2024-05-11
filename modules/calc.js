@@ -491,6 +491,19 @@ function getTrimpAttack(realDamage) {
 	return attack;
 }
 
+function _getSpireStrengthBonus(worldType = _getWorldType(), heirloomToCheck = heirloomCoreToEquip(worldType)) {
+	const worldBonus = getHeirloomBonus_AT('Core', 'worldBonus', heirloomToCheck);
+	const strengthBonus = getHeirloomBonus_AT('Core', 'strengthBonus', heirloomToCheck);
+
+	const { Strength } = playerSpireTraps;
+	let mod = 30;
+	if (Strength.level > 1) mod += (Strength.level - 1) * 15;
+	mod *= 1 + strengthBonus / 100;
+	mod *= 1 + worldBonus / 100;
+
+	return mod * Strength.owned;
+}
+
 function calcOurDmg(minMaxAvg = 'avg', universeSetting, realDamage = false, worldType = _getWorldType(), critMode, mapLevel = _getZone(worldType) - game.global.world, useTitimp = false, specificHeirloom = false) {
 	const runningAutoTrimps = typeof atSettings !== 'undefined';
 	const heirloomToCheck = !runningAutoTrimps ? null : !specificHeirloom ? heirloomShieldToEquip(worldType) : specificHeirloom;
@@ -520,7 +533,7 @@ function calcOurDmg(minMaxAvg = 'avg', universeSetting, realDamage = false, worl
 		pandemonium: () => game.challenges.Pandemonium.getTrimpMult(),
 		desolation: () => game.challenges.Desolation.getTrimpMult(),
 		sugarRush: () => (game.global.sugarRush ? sugarRush.getAttackStrength() : 1),
-		strengthTowers: () => 1 + playerSpireTraps.Strength.getWorldBonus() / 100,
+		strengthTowers: () => 1 + _getSpireStrengthBonus(worldType) / 100,
 		sharpTrimps: () => (game.singleRunBonuses.sharpTrimps.owned ? 1.5 : 1),
 		geneAttack: () => (u2Mutations.tree.GeneAttack.purchased ? 10 : 1),
 		brainsToBrawn: () => (u2Mutations.tree.Brains.purchased ? u2Mutations.tree.Brains.getBonus() : 1),
@@ -683,8 +696,9 @@ function badGuyCritMult(enemy = getCurrentEnemy(), critPower = 2, block = game.g
 
 function calcEnemyBaseAttack(worldType = _getWorldType(), zone = _getZone(worldType), cell = _getCell(), name = _getEnemyName('Chimp'), query = false) {
 	const mapGrid = worldType === 'world' ? 'gridArray' : 'mapGridArray';
+	const gridInitialised = game.global.gridArray && game.global.gridArray.length > 0;
 
-	if (!query && (zone >= 200 || challengeActive('Randomized')) && cell !== 100 && worldType === 'world' && game.global.universe === 2 && game.global[mapGrid][cell].u2Mutation) {
+	if (gridInitialised && !query && (zone >= 200 || challengeActive('Randomized')) && cell !== 100 && worldType === 'world' && game.global.universe === 2 && game.global[mapGrid][cell].u2Mutation) {
 		return u2Mutations.getAttack(game.global[mapGrid][cell - 1]);
 	}
 
@@ -863,7 +877,8 @@ function calcSpecificEnemyAttack(critPower = 2, customBlock, customHealth, custo
 }
 
 function calcEnemyBaseHealth(worldType = _getWorldType(), zone = _getZone(worldType), cell = _getCell(), name = _getEnemyName('Turtlimp'), ignoreMutation) {
-	if (!ignoreMutation && worldType === 'world' && game.global.universe === 2 && (game.global.world >= 200 || challengeActive('Randomized')) && typeof game.global.gridArray[cell - 1].u2Mutation !== 'undefined') {
+	const gridInitialised = game.global.gridArray && game.global.gridArray.length > 0;
+	if (gridInitialised && !ignoreMutation && worldType === 'world' && game.global.universe === 2 && (game.global.world >= 200 || challengeActive('Randomized')) && typeof game.global.gridArray[cell - 1].u2Mutation !== 'undefined') {
 		if (game.global.gridArray[cell - 1].u2Mutation.length > 0 && ['CSX', 'CSP'].some((mutation) => game.global.gridArray[cell - 1].u2Mutation.includes(mutation))) {
 			cell = game.global.gridArray[cell - 1].cs;
 		}

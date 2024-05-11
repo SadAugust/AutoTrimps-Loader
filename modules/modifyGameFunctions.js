@@ -787,18 +787,20 @@ function calculateMaxAfford_AT(itemObj, isBuilding, isEquipment, isJob, forceMax
 
 //AT versions for heirloom bonuses.
 //Check and update each patch!
-function getHeirloomBonus_AT(type, modName, customShield) {
-	if (!customShield && (!game.heirlooms[type] || !game.heirlooms[type][modName])) return 0;
+function getHeirloomBonus_AT(type, modName, customHeirloom) {
+	if (!customHeirloom && (!game.heirlooms[type] || !game.heirlooms[type][modName])) return 0;
 	let bonus;
-	//Override bonus if needed with gammaBurst otherwise check customShield and lastly use the game heirloom bonus.
-	if (customShield) bonus = heirloomModSearch(customShield, modName);
+	//Override bonus if needed with gammaBurst otherwise check customHeirloom and lastly use the game heirloom bonus.
+	if (customHeirloom) bonus = heirloomModSearch(customHeirloom, modName);
 	else if (modName === 'gammaBurst') bonus = game.global.gammaMult / 100;
 	else bonus = game.heirlooms[type][modName].currentBonus;
+
 	if (bonus === undefined) return 0;
 
 	if (challengeActive('Daily') && typeof game.global.dailyChallenge.heirlost !== 'undefined') {
 		if (modName !== 'FluffyExp' && modName !== 'VoidMaps') bonus *= dailyModifiers.heirlost.getMult(game.global.dailyChallenge.heirlost.strength);
 	}
+
 	return scaleHeirloomModUniverse(type, modName, bonus);
 }
 

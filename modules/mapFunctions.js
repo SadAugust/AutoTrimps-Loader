@@ -443,8 +443,8 @@ function _findSettingsIndexVoidMaps(settingName, baseSettings, dailyAddition) {
 				if (currSetting[hdTypes[index]] === 'disabled') return false;
 				const obj = hdObject[currSetting[hdTypes[index]]];
 				const hdSetting = obj.hdStatVoid || obj.hdStat;
-				if (currSetting[hdTypes[index]].includes('Hits Survived')) return currSetting[dropdown] > hdSetting;
-				return currSetting[dropdown] < hdSetting;
+				if (currSetting[hdTypes[index]].includes('Hits Survived')) return currSetting[dropdown] < hdSetting;
+				return currSetting[dropdown] > hdSetting;
 			});
 			if (shouldSkipLine && endzone !== game.global.world) continue;
 			if (endzone === game.global.world || game.global.world - world >= 0) {
@@ -1292,12 +1292,14 @@ function _raidingTargetPrestige(setting) {
 }
 
 function _raidingRaidZone(setting, mapName) {
-	let raidZones = Number(setting.raidingzone);
+	let raidZones = Number(setting.raidingzone) || 0;
 	raidZones += mapName !== 'Bionic Raiding' ? setting.world : 0;
+
 	if (setting.repeatevery !== 0 && game.global.world > setting.world) {
 		const repeats = Math.floor((game.global.world - setting.world) / setting.repeatevery);
 		raidZones += repeats > 0 ? setting.repeatevery * repeats : 0;
 	}
+
 	return raidZones;
 }
 
@@ -2711,10 +2713,11 @@ function desolation(lineCheck, forceDestack) {
 
 function _getDesolationMapLevel(trimpHealth, mapName, mapSpecial, sliders) {
 	let mapLevel;
+	const mapObj = getCurrentMapObject();
 
 	for (let y = 10; y >= 0; y--) {
 		mapLevel = y;
-		if (game.global.mapsActive && mapSettings.mapName === mapName && (getCurrentMapObject().bonus === undefined ? '0' : getCurrentMapObject().bonus) === mapSpecial && getCurrentMapObject().level - game.global.world === mapLevel) break;
+		if (game.global.mapsActive && mapSettings.mapName === mapName && (mapObj.bonus === undefined ? '0' : mapObj) === mapSpecial && mapObj.level - game.global.world === mapLevel) break;
 		if (mapLevel === 0) break;
 		if (game.resources.fragments.owned < mapCostMin(mapLevel, mapSpecial, 'Random', sliders)) continue;
 		const enemyDmg = calcEnemyAttackCore('map', game.global.world + y, 1, 'Snimp', false, false, game.portal.Equality.radLevel) * 0.84 * 4;
@@ -2722,7 +2725,7 @@ function _getDesolationMapLevel(trimpHealth, mapName, mapSpecial, sliders) {
 		break;
 	}
 
-	if (game.global.mapsActive && getCurrentMapObject().level !== game.global.world + mapLevel) {
+	if (game.global.mapsActive && mapSettings.mapName === mapName && !mapObj.noRecycle && mapObj.level !== game.global.world + mapLevel) {
 		recycleMap_AT();
 	}
 
@@ -2731,7 +2734,6 @@ function _getDesolationMapLevel(trimpHealth, mapName, mapSpecial, sliders) {
 
 function _desolationGearScumSetting(defaultSettings) {
 	return {
-		jobratio,
 		mapLevel: 1,
 		autoLevel: true,
 		level: 1,
@@ -2759,8 +2761,8 @@ function desolationGearScum(lineCheck) {
 	if (!defaultSettings || !defaultSettings.active) return farmingDetails;
 
 	const settingIndex = findSettingsIndex(settingName, baseSettings, mapName);
-	//const setting = MODULES.mapFunctions.desoGearScum ? _desolationGearScumSetting(defaultSettings) : baseSettings[settingIndex];
-	const setting = baseSettings[settingIndex];
+	const setting = MODULES.mapFunctions.desoGearScum ? _desolationGearScumSetting(defaultSettings) : baseSettings[settingIndex];
+
 	if (lineCheck) return setting;
 
 	//if (setting) Object.assign(farmingDetails, _runDesoGearScum(setting, mapName, settingIndex));
@@ -2780,7 +2782,7 @@ function desolationGearScum(lineCheck) {
 		//Check if a max attack+gamma burst can clear the improb.
 		//If it can't continue as normal, if it can then we start the +1 map for prestige scumming.
 		let currCell = game.global.lastClearedCell + 2;
-		let name = game.global.gridArray && game.global.gridArray[0] ? game.global.gridArray[cell - 1].name : undefined;
+		let name = game.global.gridArray && game.global.gridArray[0] ? game.global.gridArray[currCell - 1].name : undefined;
 		let enemyHealth = getCurrentWorldCell().maxHealth > -1 ? getCurrentWorldCell().health : calcEnemyHealthCore('world', game.global.world, currCell, name);
 		let equalityAmt = equalityQuery('Improbability', game.global.world, 100, 'world', 1, 'gamma');
 		let ourDmg = calcOurDmg('max', equalityAmt, false, 'world', 'force', 0, false);
@@ -3239,7 +3241,9 @@ function farmingDecision() {
 	};
 
 	if (!game.global.mapsUnlocked || _leadDisableMapping()) return (mapSettings = farmingDetails);
+
 	let mapTypes = [];
+
 	//U1 map settings to check for.
 	if (game.global.universe === 1) {
 		mapTypes = [mapDestacking, prestigeClimb, prestigeRaiding, bionicRaiding, mapFarm, hdFarm, voidMaps, experience, mapBonus, toxicity, _obtainUniqueMap];
@@ -3269,6 +3273,7 @@ function farmingDecision() {
 	//Running the entire function again is done to ensure that we update the status message and check if it still wants to run.
 	if (mapSettings.mapName !== '' && mapTypes.includes(mapSettings.settingName)) {
 		let mapCheck = mapSettings.settingName();
+
 		if (mapCheck.shouldRun) {
 			farmingDetails = mapCheck;
 			farmingDetails.settingName = mapSettings.settingName;
@@ -3280,11 +3285,13 @@ function farmingDecision() {
 	if (farmingDetails.mapName === '') {
 		for (const map of mapTypes) {
 			let mapCheck = map(true);
+
 			if (mapCheck && mapCheck.mapName === undefined) {
 				mapCheck.settingName = map;
 				priorityList.push(mapCheck);
 			}
 		}
+
 		//Sort priority list by priority > mapTypes index(settingName) if the priority sorting toggle is on
 		if (getPageSetting('autoMapsPriority')) {
 			//mapTypes.unshift(boneShrine);
@@ -3475,7 +3482,7 @@ function _simulateSliders(mapLevel, special = getAvailableSpecials('lmc'), biome
 }
 
 function mapCost(plusLevel = 0, specialModifier = getAvailableSpecials('lmc'), biome = getBiome(), sliders = [9, 9, 9], perfect = true) {
-	const mapLevel = Math.max(game.global.world + plusLevel, 6);
+	const mapLevel = Math.max(game.global.world, 6);
 	let baseCost = sliders[0] + sliders[1] + sliders[2];
 	baseCost *= game.global.world >= 60 ? 0.74 : 1;
 
@@ -3514,12 +3521,16 @@ function shouldSkipSetting(currSetting, world, settingName, dailyAddition) {
 }
 
 function shouldSkipSettingPrestigeGoal(currSetting, mapName) {
+	const desoAddition = mapName === 'Desolation Gear Scum' ? 1 : 0;
+
 	if (currSetting.prestigeGoal) {
 		const targetPrestige = _raidingTargetPrestige(currSetting);
 		const raidZones = _raidingRaidZone(currSetting, mapName);
-		const [equipsToFarm] = prestigesToGet(raidZones, targetPrestige);
+		const [equipsToFarm] = prestigesToGet(raidZones + desoAddition, targetPrestige);
+
 		return equipsToFarm === 0;
 	}
+
 	return false;
 }
 
@@ -3533,6 +3544,7 @@ function findSettingsIndex(settingName, baseSettings, mapName, dailyAddition, sk
 			if (currSetting.hdType.toLowerCase().includes('void') && game.global.totalVoidMaps === 0) continue;
 			if (skipHealthCheck && currSetting.hdType.includes('hitsSurvived')) continue;
 		}
+
 		currSetting.cell = currSetting.cell || 100 - maxOneShotPower() + 1;
 
 		if (shouldSkipSetting(currSetting, world, settingName, dailyAddition)) continue;
@@ -3544,6 +3556,7 @@ function findSettingsIndex(settingName, baseSettings, mapName, dailyAddition, sk
 			return y;
 		}
 	}
+
 	return null;
 }
 

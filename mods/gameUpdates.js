@@ -1851,7 +1851,8 @@ function calculateDamage(number = 1, buildString, isTrimp, noCheckAchieve, cell,
 			strengthTowers: () => 1 + playerSpireTraps.Strength.getWorldBonus() / 100,
 			sharpTrimps: () => (game.singleRunBonuses.sharpTrimps.owned ? 1.5 : 1),
 			geneAttack: () => (u2Mutations.tree.GeneAttack.purchased ? 10 : 1),
-			brainsToBrawn: () => (u2Mutations.tree.Brains.purchased ? u2Mutations.tree.Brains.getBonus() : 1)
+			brainsToBrawn: () => (u2Mutations.tree.Brains.purchased ? u2Mutations.tree.Brains.getBonus() : 1),
+			stillRowing: () => (game.talents.stillRowing2.purchased ? game.global.spireRows * 0.06 + 1 : 1)
 		};
 		number = applyMultipliers(multipliers, number);
 
@@ -1862,7 +1863,6 @@ function calculateDamage(number = 1, buildString, isTrimp, noCheckAchieve, cell,
 			const multipliers = {
 				anticipation: () => (game.global.antiStacks > 0 ? game.global.antiStacks * getPerkLevel('Anticipation') * game.portal.Anticipation.modifier + 1 : 1),
 				magmamancer: () => (game.talents.magmamancer.purchased ? game.jobs.Magmamancer.getBonusPercent() : 1),
-				stillRowing: () => (game.talents.stillRowing2.purchased ? game.global.spireRows * 0.06 + 1 : 1),
 				kerfluffle: () => (Fluffy.isActive() && game.talents.kerfluffle.purchased ? game.talents.kerfluffle.mult() : 1),
 				strengthInHealth: () => (game.talents.healthStrength.purchased && mutations.Healthy.active() ? 0.15 * mutations.Healthy.cellCount() + 1 : 1),
 				voidSipon: () => (game.stats.totalVoidMaps.value && Fluffy.isRewardActive('voidSiphon') ? 1 + game.stats.totalVoidMaps.value * 0.05 : 1),
@@ -4517,7 +4517,7 @@ function calculateMapCost(plusLevel = 0) {
 	const mapPresets = game.global.universe === 2 ? game.global.mapPresets2 : game.global.mapPresets;
 	const { loot, difficulty, size, biome, perf, specMod } = mapPresets[`p${game.global.selectedMapPreset}`];
 
-	const mapLevel = Math.max(game.global.world + plusLevel, 6);
+	const mapLevel = Math.max(game.global.world, 6);
 	let baseCost = loot + difficulty + size;
 	baseCost *= game.global.world >= 60 ? 0.74 : 1;
 

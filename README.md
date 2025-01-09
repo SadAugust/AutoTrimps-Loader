@@ -1,8 +1,7 @@
 # AutoTrimps - SadAugust Fork
+# Development Stopped!
 
-# Current Version - Ongoing Development!
-
--   SadAugust Fork. All changes made by SadAugust using Zorn192/GenBTC as base. Currently up-to-date with patch 5.9.2.
+-   SadAugust Fork. All changes made by SadAugust using Zorn192/GenBTC as base. This was a test for myself for playing Loader fork and is no longer being maintained. Any bugs will have to be fixed through forking the script.
 
 # AT Script Installation
 
@@ -40,8 +39,7 @@ Configure settings. Will NOT work as intended with default settings.
 
 ## Steam
 
-Step 1:
-Go to this link to open the mods.js file: <a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/mods.js">mods.js</a>  
+Step 1: Go to this link to open the mods.js file: <a href="https://github.com/SadAugust/AutoTrimps-Loader/raw/main/userFiles/mods.js">mods.js</a>  
 Then, right click the Raw button, hit Save link as, and save the mods.js file somewhere to your computer where you can find it, like desktop.  
 ![Download mods.js](https://i.imgur.com/opuO6yd.png)
 

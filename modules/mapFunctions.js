@@ -3577,7 +3577,13 @@ function settingShouldRun(currSetting, world, zoneReduction = 0, settingName) {
 	const totalPortals = getTotalPortals();
 	const value = game.global.universe === 2 ? 'valueU2' : 'value';
 	if (settingName && currSetting.row) {
-		const settingDone = game.global.addonUser[settingName][value][currSetting.row].done;
+		let setting = game.global.addonUser[settingName];
+		if (!setting) {
+			setupAddonUser(true);
+			setting = game.global.addonUser[settingName];
+		}
+
+		const settingDone = setting[value][currSetting.row].done;
 		if (settingDone === `${totalPortals}_${game.global.world}`) return false;
 		//Ensure we don't eternally farm if daily reset timer is low enough that it will start again next zone
 		if (currSetting.mapType && currSetting.mapType === 'Daily Reset' && settingDone && settingDone.split('_')[0] === totalPortals.toString()) return false;
